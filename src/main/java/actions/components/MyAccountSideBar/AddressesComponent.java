@@ -1,6 +1,6 @@
 package actions.components.MyAccountSideBar;
 import commons.base.BasePage;
-import dataObjects.CustomerData;
+import dataTest.dataObject.CustomerData;
 import interfaces.componentUI.myAccountSideBar.AddressesPageUI;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

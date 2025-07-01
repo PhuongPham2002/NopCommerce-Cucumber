@@ -4,7 +4,6 @@ import actions.components.Footer.FooterComponent;
 
 import actions.components.MyAccountSideBar.*;
 import org.openqa.selenium.WebDriver;
-import dataObjects.CustomerData;
 
 public class PageGenerator {
 

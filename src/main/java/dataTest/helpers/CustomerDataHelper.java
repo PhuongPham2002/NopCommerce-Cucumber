@@ -1,7 +1,7 @@
-package data.helpers;
+package dataTest.helpers;
 
 import commons.helpers.CommonHelper;
-import dataObjects.CustomerData;
+import dataTest.dataObject.CustomerData;
 
 public class CustomerDataHelper {
     public final static String FIRSTNAME ="Automation";

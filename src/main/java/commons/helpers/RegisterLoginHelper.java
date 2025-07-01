@@ -3,7 +3,7 @@ package commons.helpers;
 import actions.pageObject.*;
 import actions.pageObject.PageGenerator;
 import commons.base.BaseTest;
-import data.helpers.RegisterDataHelper;
+import dataTest.helpers.RegisterDataHelper;
 import lombok.Getter;
 import lombok.Setter;
 import org.openqa.selenium.Cookie;

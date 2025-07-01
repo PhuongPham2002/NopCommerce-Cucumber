@@ -1,10 +1,10 @@
-package data.provider;
+package dataTest.provider;
 
 import com.poiji.bind.Poiji;
 import com.poiji.option.PoijiOptions;
 import commons.helpers.CommonHelper;
-import data.helpers.RegisterDataHelper;
-import dataObjects.RegisterTestData;
+import dataTest.helpers.RegisterDataHelper;
+import dataTest.dataObject.RegisterTestData;
 import org.testng.annotations.DataProvider;
 
 import java.io.File;

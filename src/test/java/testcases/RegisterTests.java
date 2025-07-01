@@ -6,16 +6,15 @@ import actions.pageObject.PageGenerator;
 import actions.pageObject.RegisterPageObject;
 import commons.base.BaseTest;
 import commons.constants.RegisterMessageConstants;
-import data.helpers.RegisterDataHelper;
-import data.provider.RegisterDataProvider;
-import dataObjects.RegisterTestData;
+import dataTest.helpers.RegisterDataHelper;
+import dataTest.provider.RegisterDataProvider;
+import dataTest.dataObject.RegisterTestData;
 import io.qameta.allure.*;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 
 @Feature("Register")

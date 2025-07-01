@@ -1,4 +1,4 @@
-package data.factory;
+package dataTest.factory;
 
 public class RegisterTestDataFactory {
 

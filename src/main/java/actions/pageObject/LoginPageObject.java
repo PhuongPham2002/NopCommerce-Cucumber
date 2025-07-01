@@ -1,6 +1,7 @@
 package actions.pageObject;
 
 import commons.base.BasePage;
+import commons.constants.LoginMessageConstants;
 import interfaces.pageUI.LoginPageUI;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
@@ -59,19 +60,33 @@ public class LoginPageObject extends BasePage {
         return getElementText(driver,LoginPageUI.ERROR_MESSAGE);
     }
 
-    public void verifyErrorMessages(String expectedMessage, String position){
-        switch (position){
-            case "email":
-                Assert.assertEquals(getErrorLoginMessage(),expectedMessage);
-                break;
-            case "summary":
-                Assert.assertEquals(getErrorMessage(),expectedMessage);
-                break;
-            default:
-                throw new IllegalArgumentException("Invalid position of message: "+position);
+
+//    public void verifyErrorMessages(String expectedMessage, String position){
+//        switch (position){
+//            case "email":
+//                Assert.assertEquals(getErrorLoginMessage(),expectedMessage);
+//                break;
+//            case "summary":
+//                Assert.assertEquals(getErrorMessage(),expectedMessage);
+//                break;
+//            default:
+//                throw new IllegalArgumentException("Invalid position of message: "+position);
+//        }
+//
+//    }
+
+    public void verifyErrorMessages(String expectedMessage){
+        if (expectedMessage.equals(LoginMessageConstants.EMPTY_EMAIL_PASSWORD_MESSAGE) || expectedMessage.equals(LoginMessageConstants.INVALID_EMAIL_MESSAGE)){
+            Assert.assertEquals(getErrorLoginMessage(),expectedMessage);
+        }
+        else if (expectedMessage.equals(LoginMessageConstants.NON_REGISTER_EMAIL_MESSAGE) || expectedMessage.equals(LoginMessageConstants.INVALID_PASSWORD_MESSAGE)){
+            Assert.assertEquals(getErrorMessage(),expectedMessage);
+        } else {
+            throw new RuntimeException("Invalid expected message" + expectedMessage);
         }
 
     }
+
 
     public boolean isMyAccountLinkVisible(){
         waitForElementVisible(driver,LoginPageUI.MY_ACCOUNT_LINK);

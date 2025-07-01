@@ -5,7 +5,7 @@ import actions.pageObject.LoginPageObject;
 import actions.pageObject.PageGenerator;
 import commons.base.BaseTest;
 import commons.constants.LoginMessageConstants;
-import data.helpers.LoginDataHelper;
+import dataTest.helpers.LoginDataHelper;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;

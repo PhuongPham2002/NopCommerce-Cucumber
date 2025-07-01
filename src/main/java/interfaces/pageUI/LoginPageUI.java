@@ -13,6 +13,7 @@ public class LoginPageUI {
 
     //Cucumber Implement:
     public static final String ERROR_MESSAGE ="css=div.validation-summary-errors";
+    public final static String INVALID_EMAIL_ERROR_MESSAGE="id=Email-error";
     public static final String MY_ACCOUNT_LINK="css=a.ico-account";
 
 }

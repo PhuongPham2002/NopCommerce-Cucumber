@@ -3,7 +3,7 @@ package actions.components.MyAccountSideBar;
 import actions.pageObject.HomePageObject;
 import actions.pageObject.PageGenerator;
 import commons.base.BasePage;
-import dataObjects.CustomerData;
+import dataTest.dataObject.CustomerData;
 import interfaces.componentUI.myAccountSideBar.ChangePasswordPageUI;
 import org.openqa.selenium.WebDriver;
 

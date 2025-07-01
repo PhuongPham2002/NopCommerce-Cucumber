@@ -1,9 +1,8 @@
-package dataObjects;
+package dataTest.dataObject;
 
 import com.poiji.annotation.ExcelCellName;
 import com.poiji.annotation.ExcelSheet;
 import lombok.Getter;
-import lombok.Setter;
 
 @ExcelSheet("RegisterData")
 @Getter

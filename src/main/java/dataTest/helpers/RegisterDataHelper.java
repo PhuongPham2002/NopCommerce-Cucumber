@@ -1,7 +1,7 @@
-package data.helpers;
+package dataTest.helpers;
 
 import commons.helpers.CommonHelper;
-import dataObjects.RegisterTestData;
+import dataTest.dataObject.RegisterTestData;
 
 public class
 RegisterDataHelper {

@@ -11,8 +11,8 @@
         <parameter name="url" value="https://localhost:59579/">
         </parameter>
         <classes>
-            <class name="commons.helpers.RegisterLoginHelper"/>
-            <class name="testcases.MyAccountTests"/>
+            <!--class name="commons.commons.helpers.RegisterLoginHelper"/-->
+            <class name="testcases.LoginTests"/>
         </classes>
         
     </test>

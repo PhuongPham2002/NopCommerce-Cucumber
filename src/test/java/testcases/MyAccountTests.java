@@ -7,13 +7,13 @@ import actions.pageObject.PageGenerator;
 import commons.base.BaseTest;
 import commons.helpers.RegisterLoginHelper;
 import commons.helpers.CommonHelper;
-import data.helpers.CustomerDataHelper;
+import dataTest.helpers.CustomerDataHelper;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
-import dataObjects.CustomerData;
+import dataTest.dataObject.CustomerData;
 import org.testng.annotations.Test;
 
 public class MyAccountTests extends BaseTest {

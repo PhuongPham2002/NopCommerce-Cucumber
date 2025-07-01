@@ -3,13 +3,13 @@ package stepdefinitions;
 import actions.pageObject.HomePageObject;
 import actions.pageObject.LoginPageObject;
 import actions.pageObject.PageGenerator;
-import commons.DriverManager;
-import data.helpers.LoginDataHelper;
+import helpers.DriverManager;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.WebDriver;
-import org.testng.Assert;
+
+
 
 public class LoginSteps {
     LoginPageObject loginPage;
@@ -17,7 +17,7 @@ public class LoginSteps {
     WebDriver driver;
 
 
-    @Given("user is on the login page")
+    @Given("I am on the login page")
     public void openLoginPage(){
         driver = DriverManager.getDriver();
         homePage = PageGenerator.getHomePage(driver);
@@ -25,37 +25,37 @@ public class LoginSteps {
 
     }
 
-    @When("user enters {string} and {string}")
-    public void userEntersEmailAndPassword(String email, String password) {
-        loginPage.enterLoginForm(email,password);
+
+    //Login_01:
+
+    @When("I log in with {string} and {string}")
+    public void loginWithCredentials(String emailAddress, String password) {
+        loginPage.enterLoginForm(emailAddress,password);
+
     }
 
-
-
-    @When("user clicks login button")
-    public void userClicksLoginButton(){
-        homePage=loginPage.clickLoginButton();
-    }
-    @Then("a message {string} is displayed at {string}")
-    public void verifyErrorMessages(String expectedMessage, String position){
-        loginPage.verifyErrorMessages(expectedMessage,position);
+    @When("I clicks login button")
+    public void iClicksLoginButton(){
+      loginPage.clickLoginButton();
     }
 
+    @Then("I should see the {string}")
+    public void iShouldSeeErrorMessage(String expectedMessage) {
+        loginPage.verifyErrorMessages(expectedMessage);
+    }
 
 
     //Login_02:
 
-    @When("user enters valid email and valid password")
-    public void userEntersValidEmailAndPassword(){
-        loginPage.enterLoginForm(LoginDataHelper.EMAIL_ADDRESS,LoginDataHelper.PASSWORD);
-
+    @Then("I should be navigated to HomePage")
+    public void iShouldBeNavigatedToHomePage() {
+        loginPage.isMyAccountLinkVisible();
     }
 
-    @Then("my account link should be visible")
-    public void verifyMyAccountVisible(){
-        Assert.assertTrue(loginPage.isMyAccountLinkVisible());
-    }
+    @Given("I log in as an {word}")
+    public void iLogInAsAdmin(String role) {
 
+    }
 
 
 }

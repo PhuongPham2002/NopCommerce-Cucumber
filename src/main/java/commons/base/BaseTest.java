@@ -27,7 +27,6 @@ public class BaseTest {
     WebDriver driver;
     protected final Logger log;
     public BaseTest(){
-
         log = LogManager.getLogger(getClass());
     }
     public WebDriver getDriver(){

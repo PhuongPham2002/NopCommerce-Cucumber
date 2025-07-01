@@ -1,7 +1,7 @@
 package actions.components.MyAccountSideBar;
 
 import commons.base.BasePage;
-import dataObjects.CustomerData;
+import dataTest.dataObject.CustomerData;
 import interfaces.componentUI.myAccountSideBar.CustomerInfoPageUI;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
