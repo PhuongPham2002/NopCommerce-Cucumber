@@ -86,6 +86,9 @@ public class WaitHelper {
         getWebDriverWait(driver).until(ExpectedConditions.numberOfElementsToBe(LocatorHelper.getByLocator(rawLocator),number));
 
     }
+    public static void waitForDomPropertyTobe(WebDriver driver,WebElement element, String value){
+        getWebDriverWait(driver).until(ExpectedConditions.domPropertyToBe(element,"innerText",value));
+    }
 
     public static void waitForTextVisible (WebDriver driver, String templateLocator, String...dynamics){
         FluentWait<WebDriver> wait = new FluentWait<>(driver);

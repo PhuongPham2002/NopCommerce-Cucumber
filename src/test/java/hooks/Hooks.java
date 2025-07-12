@@ -18,13 +18,7 @@ public class Hooks {
 
     @Before
     public void beforeScenario (){
-
-
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        DriverManager.setDriver(driver);
-        driver.get("https://localhost:59579/");
-
+        driver = DriverManager.getBrowserDriver();
     }
 
 
@@ -32,6 +26,7 @@ public class Hooks {
     public void afterScenario(){
         DriverManager.quitDriver();
         }
+
 
     @AfterStep
     public void takeScreenshotIfFailed(Scenario scenario){

@@ -1,4 +1,4 @@
-package commons.base;
+package interfaces.enums;
 
 public enum BrowserList {
     FIREFOX,CHROME,EDGE,SAFARI

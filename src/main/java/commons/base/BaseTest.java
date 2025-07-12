@@ -1,6 +1,7 @@
 package commons.base;
 
 import commons.helpers.CommonHelper;
+import interfaces.enums.BrowserList;
 import io.qameta.allure.Step;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -24,34 +25,36 @@ BaseTest thường sẽ chứa:
 Các method hỗ trợ như getDriver(), closeBrowser(), v.v.
  */
 public class BaseTest {
-    WebDriver driver;
+    //WebDriver driver;
     protected final Logger log;
     public BaseTest(){
         log = LogManager.getLogger(getClass());
     }
-    public WebDriver getDriver(){
-        return driver;
+    private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
+    public WebDriver getDriver()
+    {
+        return driver.get();
     }
     public WebDriver getBrowserDriver(String browserName, String url) {
         BrowserList browserList = BrowserList.valueOf(browserName.toUpperCase());
 
         switch (browserList){
             case CHROME:
-                driver = new ChromeDriver();
+                driver.set(new ChromeDriver());
                 break;
             case FIREFOX:
-                driver = new FirefoxDriver();
+                driver.set(new FirefoxDriver());
                 break;
             case EDGE:
-                driver = new EdgeDriver();
+                driver.set(new EdgeDriver());
             case SAFARI:
-                driver = new SafariDriver();
+                driver.set(new SafariDriver());
             default:
                 throw new RuntimeException("Trình duyệt nhập vào không được hỗ trợ "+browserName);
         }
-        driver.manage().window().maximize();
-        driver.get(url);
-        return driver;
+        driver.get().manage().window().maximize();
+        driver.get().get(url);
+        return driver.get();
 
     }
 
@@ -60,8 +63,8 @@ public class BaseTest {
 
         try {
             if (driver != null){
-                driver.manage().deleteAllCookies();
-                driver.quit();
+                driver.get().manage().deleteAllCookies();
+                driver.get().quit();
             }
            String osName = System.getProperty("os.name").toLowerCase();
            String driverInstanceName = driver.toString().toLowerCase();
