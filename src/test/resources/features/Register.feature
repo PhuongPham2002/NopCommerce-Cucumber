@@ -52,26 +52,6 @@ Feature: Register
       | Phuong    | Pham     | phuong.com | 123456789 | 123456789       | Please enter a valid email address. |
 
 
-#        Scenario: Register_05: Register with existed email
-#          Given my account already existed
-#          Given I fill in register form with data:
-#            | FirstName |Phuong|
-#            | LastName  |Pham|
-#            | Email     |nhan@gmail.com|
-#            | Password  |123456789|
-#            | Confirm Password |123456789|
-#          And I click register button
-#          And I should see the register successful messages "Your registration completed"
-#
-#          When I fill in register form with data:
-#            | FirstName |Phuong|
-#            | LastName  |Pham|
-#            | Email     |nhan@gmail.com|
-#            | Password  |123456789|
-#            | Confirm Password |123456789|
-#          And I click register button
-#          Then I should see the error messages "The specified email already exists"
-
   Scenario: Register_06: Register with valid email
     When The user register a new account with the following information
       | FirstName        | Phuong    |

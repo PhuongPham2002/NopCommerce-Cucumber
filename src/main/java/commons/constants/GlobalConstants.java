@@ -16,5 +16,5 @@ public class GlobalConstants {
 
     //Login info
     public static final String LOGIN_EMAIL="admin@yourstore.com";
-    public static final String LOGIN_PASSWORD ="admin";
+    public static final String LOGIN_PASSWORD ="admin123";
 }
