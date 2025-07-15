@@ -6,6 +6,8 @@ import interfaces.componentUI.myAccountSideBar.CustomerInfoPageUI;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
+import java.util.Map;
+
 public class CustomerInfoComponent extends BasePage {
     WebDriver driver;
 
@@ -43,5 +45,7 @@ public class CustomerInfoComponent extends BasePage {
         Assert.assertEquals(getAttributeValueByID(driver,CustomerInfoPageUI.FIELD_TEXTBOX_BY_ID,"value","Company"),customerData.getCompanyName());
 
     }
+
+    //Cucumber
 
 }

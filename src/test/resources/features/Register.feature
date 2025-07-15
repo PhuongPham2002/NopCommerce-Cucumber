@@ -1,3 +1,4 @@
+@Register
 Feature: Register
 
   Background:
@@ -10,7 +11,7 @@ Feature: Register
       | LastName         |  |
       | Email            |  |
       | Password         |  |
-      | Confirm Password |  |
+      | ConfirmPassword |  |
     Then The user should see the following register error message
       | FirstName       | First name is required. |
       | LastName        | Last name is required.  |
@@ -24,7 +25,7 @@ Feature: Register
       | LastName         | Pham             |
       | Email            | phuong@gmail.com |
       | Password         | 1234             |
-      | Confirm Password | 1234             |
+      | ConfirmPassword | 1234             |
     Then The user should see the register error message "Password must meet the following rules: must have at least 6 characters and not greater than 64 characters" at "password" field
 
   Scenario: Register_03: Register with mismatchPassword
@@ -33,7 +34,7 @@ Feature: Register
       | LastName         | Pham             |
       | Email            | phuong@gmail.com |
       | Password         | 123456789        |
-      | Confirm Password | 1234             |
+      | ConfirmPassword | 1234             |
     Then The user should see the register error message "The password and confirmation password do not match." at "confirm password" field
 
   Scenario Outline: Register_04: Register with invalid email
@@ -42,7 +43,7 @@ Feature: Register
       | LastName         | <LastName>        |
       | Email            | <Email>           |
       | Password         | <Password>        |
-      | Confirm Password | <ConfirmPassword> |
+      | ConfirmPassword | <ConfirmPassword> |
     Then The user should see the register error message "<error message>" at "email" field
     Examples:
       | FirstName | LastName | Email      | Password  | ConfirmPassword | error message                       |
@@ -77,7 +78,7 @@ Feature: Register
       | LastName         | Pham      |
       | Email            | [random]  |
       | Password         | 123456789 |
-      | Confirm Password | 123456789 |
+      | ConfirmPassword | 123456789 |
     Then I should see the register successful messages "Your registration completed"
 
 

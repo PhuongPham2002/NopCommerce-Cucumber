@@ -7,7 +7,6 @@ Feature:  Login feature
 
   Scenario Outline: Login_01: Log in with invalid password and unregister email
     When The user log in with "<email>" and "<password>"
-    And The user click login button
     Then The user should see the message "<message>"
     Examples:
       | case             | email         | password  | message                                                                                     |
@@ -21,10 +20,8 @@ Feature:  Login feature
 
   Scenario: Login_03: Log in with empty data
     When The user log in with "" and ""
-    And The user click login button
     Then The user should see the message "Please enter your email"
 
   Scenario: Login_04: Log in with valid email and password
-    When The user log in with "admin@yourstore.com" and "admin"
-    And The user click login button
+    When The user log in with "email" and "password"
     Then The user should be navigated to HomePage

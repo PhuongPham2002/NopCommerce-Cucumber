@@ -3,6 +3,7 @@ package stepdefinitions;
 import actions.pageObject.HomePageObject;
 import actions.pageObject.LoginPageObject;
 import actions.pageObject.PageGenerator;
+import commons.constants.GlobalConstants;
 import helpers.DriverManager;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -36,14 +37,11 @@ public class LoginSteps {
 
     @When("The user log in with {string} and {string}")
     public void loginWithCredentials(String emailAddress, String password) {
-        loginPage.enterLoginForm(emailAddress,password);
-
-    }
-
-    @When("The user click login button")
-    public void clicksLoginButton(){
+        loginPage.enterLoginForm(GlobalConstants.LOGIN_EMAIL,GlobalConstants.LOGIN_PASSWORD);
         loginPage.clickLoginButton();
+
     }
+
 
     @Then("The user should see the message {string}")
     public void userShouldSeeErrorMessage(String expectedMessage) {

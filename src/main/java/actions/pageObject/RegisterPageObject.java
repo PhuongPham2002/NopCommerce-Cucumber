@@ -45,13 +45,18 @@ public class RegisterPageObject extends BasePage {
         Map<String, String> editableRegisterData = new LinkedHashMap<>(registerData);
 
         for (Map.Entry<String, String> entry : editableRegisterData.entrySet()) {
+
+
             if (entry.getValue() == null || entry.getValue().equals("[empty]")) {
                 log.info("Giá trị ban đầu của key [" + entry.getKey() + "] là: " + entry.getValue());
                 entry.setValue("");
             }
+
             if (entry.getValue().equalsIgnoreCase("[random]")) {
                 entry.setValue(CommonHelper.generateUniqueEmail());
             }
+
+            enterTextboxByID(driver, RegisterPageUI.REGISTER_FORM_TEXTBOX_ID, entry.getValue(), entry.getKey());
         }
     }
 

@@ -3,6 +3,7 @@ package runners;
 import io.cucumber.java.Before;
 import io.cucumber.testng.CucumberOptions;
 import io.cucumber.testng.AbstractTestNGCucumberTests;
+import jdk.jfr.Registered;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 
@@ -20,6 +21,7 @@ import java.util.Properties;
                 "rerun:target/failed.txt",
                 "io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm"},
         dryRun = false,
+        tags = "@Register",
         monochrome = true
 )
 public class CucumberTestRunner extends AbstractTestNGCucumberTests{

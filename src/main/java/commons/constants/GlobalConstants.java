@@ -13,4 +13,8 @@ public class GlobalConstants {
 
     //Report
     public static final String ALLURE_REPORT = PROJECT_PATH +SEPARATOR+"allure-html"+SEPARATOR;
+
+    //Login info
+    public static final String LOGIN_EMAIL="admin@yourstore.com";
+    public static final String LOGIN_PASSWORD ="admin";
 }
