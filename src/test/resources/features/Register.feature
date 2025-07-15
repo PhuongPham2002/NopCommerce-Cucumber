@@ -3,7 +3,7 @@ Feature: Register
 
   Background:
     Given The user access Nopcommerce Webpage "https://localhost:59579/"
-    Given The user is on the register page
+    And The user is on the register page
 
   Scenario: Register_01: Register with empty data
     When The user register a new account with the following information
