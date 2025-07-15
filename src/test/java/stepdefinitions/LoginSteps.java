@@ -66,4 +66,9 @@ public class LoginSteps {
     public void theUserEnterIntoEmailFieldAndMoveToField(String emailAddress, String password) {
         loginPage.enterLoginForm(emailAddress,null);
     }
+
+    @When("The user enter {string} into {string} and move to {string} field")
+    public void theUserEnterIntoAndMoveToField(String value, String targetField, String movedField) {
+
+    }
 }
