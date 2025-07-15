@@ -14,7 +14,7 @@ Feature:  Login feature
       | InvalidPassword  | hoa@gmail.com | 1234      | Login was unsuccessful. Please correct the errors and try again.\nNo customer account found |
 
   Scenario: Login_02: Log in with invalid email
-    When The user enter "anna" into email field and move to "password" field
+    When The user enter "anna" into "email field" and move to "password" field
     Then The user should see the message "Please enter a valid email address."
     Then The user should see the message "Please enter a valid email."
     Then The user should see the message "email address."
