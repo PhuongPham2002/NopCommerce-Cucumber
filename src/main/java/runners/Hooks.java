@@ -1,4 +1,4 @@
-package hooks;
+package runners;
 
 import commons.helpers.DriverManager;
 import commons.helpers.ScenarioContext;
@@ -16,6 +16,8 @@ import java.io.ByteArrayInputStream;
 public class Hooks {
     WebDriver driver;
     ScenarioContext context;
+    public final static String TEST_ENV = System.getProperty("TestEnv", "dev");
+
     public Hooks (ScenarioContext context){
         this.context = context;
     }
