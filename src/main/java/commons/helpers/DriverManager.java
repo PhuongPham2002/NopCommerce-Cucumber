@@ -1,19 +1,11 @@
-package helpers;
+package commons.helpers;
 
 import interfaces.enums.BrowserList;
 import io.cucumber.core.exception.CucumberException;
-import io.cucumber.java.vi.Nhưng;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
-
-import static interfaces.enums.BrowserList.CHROME;
 
 public class DriverManager {
 
@@ -31,31 +23,8 @@ public class DriverManager {
        return driver.get();
     }
 
-    private static String getBrowserName() {
-        String browser = System.getProperty("browser");
-
-        if (browser == null || browser.isEmpty()) {
-            try (InputStream input = new FileInputStream("src/test/resources/config.properties")) {
-                Properties prop = new Properties();
-                prop.load(input);
-                browser = prop.getProperty("browser");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        if (browser == null || browser.isEmpty()) {
-            browser = "chrome";
-        } else {
-            browser = browser.toLowerCase();
-        }
-
-        return browser;
-    }
-
     public static WebDriver getBrowserDriver(){
-        String browser = getBrowserName();
-        System.out.println("BrowserName: "+browser);
+        String browser = System.getProperty("browser","chrome");
         BrowserList browserName = BrowserList.valueOf(browser.toUpperCase());
         switch (browserName){
             case CHROME:

@@ -4,7 +4,8 @@ import actions.pageObject.HomePageObject;
 import actions.pageObject.LoginPageObject;
 import actions.pageObject.PageGenerator;
 import commons.constants.GlobalConstants;
-import helpers.DriverManager;
+import commons.helpers.DriverManager;
+import commons.helpers.testDataHelper;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -23,8 +24,10 @@ public class LoginSteps {
     public final static String INVALID_PASSWORD_ERROR_MESSAGE = "Login was unsuccessful. Please correct the errors and try again.\nNo customer account found";
 
 
-    @Given("The user access Nopcommerce Webpage {string}")
-    public void theUserAccessIntoNopcommerceWebpage(String url) {
+    @Given("The user access {string}")
+    public void theUserAccessIntoNopcommerceWebpage(String webName) {
+        String url = testDataHelper.getData(webName.replace(" ","_"));
+        System.out.println();
         DriverManager.getDriver().get(url);
     }
 
@@ -38,12 +41,13 @@ public class LoginSteps {
     @When("The user log in with {string} and {string}")
     public void loginWithCredentials(String emailAddress, String password) {
         loginPage.enterLoginForm(GlobalConstants.LOGIN_EMAIL,GlobalConstants.LOGIN_PASSWORD);
-        loginPage.clickLoginButton();
+        homePage=loginPage.clickLoginButton();
+
 
     }
 
 
-    @Then("The user should see the message {string}")
+    @Then("The user should see the login message {string}")
     public void userShouldSeeErrorMessage(String expectedMessage) {
         if (expectedMessage.equals(EMPTY_EMAIL_PASSWORD_ERROR_MESSAGE) || expectedMessage.equals(INVALID_EMAIL_ERROR_MESSAGE)){
             Assert.assertEquals(loginPage.getEmailErrorMessage(),expectedMessage);
