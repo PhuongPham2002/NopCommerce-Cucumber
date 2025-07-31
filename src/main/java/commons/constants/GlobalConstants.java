@@ -17,4 +17,5 @@ public class GlobalConstants {
     //Login info
     public static final String LOGIN_EMAIL="admin@yourstore.com";
     public static final String LOGIN_PASSWORD ="admin123";
+    public static final String[] COMPANY_LIST = {"CMC", "Viettel", "Mobifone", "VNPT" , "FPT"};
 }

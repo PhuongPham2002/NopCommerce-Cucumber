@@ -11,7 +11,7 @@
         <parameter name="url" value="https://localhost:59579/">
         </parameter>
         <classes>
-            <class name="runners.CucumberTestRunner"/>
+            <class name="runners.TestCucumberTestRunner"/>
         </classes>
         
     </test>

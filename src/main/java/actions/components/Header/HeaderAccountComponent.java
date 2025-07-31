@@ -1,5 +1,7 @@
 package actions.components.Header;
 
+import actions.pageObject.PageGenerator;
+import actions.pageObject.RegisterPageObject;
 import commons.base.BasePage;
 import interfaces.componentUI.header.HeaderAccountComponentUI;
 import org.openqa.selenium.WebDriver;
@@ -23,17 +25,14 @@ public class HeaderAccountComponent extends BasePage {
         hoverToElement(driver,HeaderAccountComponentUI.SHOPPING_CART_LINK);
     }
 
-    public void clickRegisterLink(){
+    public RegisterPageObject clickRegisterLink(){
         waitForElementClickable(driver,HeaderAccountComponentUI.REGISTER_LINK);
         clickElement(driver,HeaderAccountComponentUI.REGISTER_LINK);
+        return PageGenerator.getRegisterPage(driver);
     }
     public void clickLogoutLink(){
         waitForElementClickable(driver,HeaderAccountComponentUI.LOGOUT_LINK);
         clickElement(driver,HeaderAccountComponentUI.LOGOUT_LINK);
-    }
-    public void clickLoginLink(){
-        waitForElementClickable(driver,HeaderAccountComponentUI.LOGIN_LINK);
-        clickElement(driver,HeaderAccountComponentUI.LOGIN_LINK);
     }
 
     public void clickMyAccountLink(){

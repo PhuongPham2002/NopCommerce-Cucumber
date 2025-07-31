@@ -3,6 +3,7 @@ package actions.pageObject;
 import actions.components.Header.HeaderComponent;
 import actions.components.MyAccountSideBar.MyAccountSideBarPageObject;
 import commons.base.BasePage;
+import interfaces.componentUI.header.HeaderAccountComponentUI;
 import interfaces.pageUI.HomePageUI;
 import org.openqa.selenium.WebDriver;
 
@@ -30,11 +31,13 @@ public class HomePageObject extends BasePage {
 
     public LoginPageObject clickLoginLink() {
         header.account.clickLoginLink();
+        waitForElementClickable(driver,HeaderAccountComponentUI.LOGIN_LINK);
+        clickElement(driver,HeaderAccountComponentUI.LOGIN_LINK);
         return PageGenerator.getLoginPage(driver);
     }
 
     public MyAccountSideBarPageObject clickMyAccountLink() {
-        header.account.clickMyAccountLink();
+        clickElement(driver, HeaderAccountComponentUI.ACCOUNT_LINK);
         return PageGenerator.getMyAccountSideBarPage(driver);
     }
 

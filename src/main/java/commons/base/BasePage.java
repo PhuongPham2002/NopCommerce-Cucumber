@@ -2,6 +2,7 @@ package commons.base;
 
 import commons.constants.GlobalConstants;
 import commons.helpers.*;
+import interfaces.componentUI.header.HeaderAccountComponentUI;
 import interfaces.pageUI.BasePageUI;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -50,6 +51,7 @@ public class BasePage {
 
     }
     public void clickElement(WebDriver driver, String rawLocator){
+        waitForElementClickable(driver, HeaderAccountComponentUI.LOGOUT_LINK);
         ElementHelper.clickElement(driver,rawLocator);
     }
     public void clickElement(WebDriver driver, String dynamicLocatorTemplate, String...dynamicParts){
@@ -305,7 +307,13 @@ public class BasePage {
         WaitHelper.waitForNumberOfElementsTobe(driver,rawLocator,number);
     }
 
-
+    public void clickWebElement(WebElement element) {
+        try {
+            element.click();
+        } catch (StaleElementReferenceException e) {
+            // Retry
+        }
+    }
 
 
 

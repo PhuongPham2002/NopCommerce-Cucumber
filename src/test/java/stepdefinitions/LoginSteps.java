@@ -5,7 +5,8 @@ import actions.pageObject.LoginPageObject;
 import actions.pageObject.PageGenerator;
 import commons.constants.GlobalConstants;
 import commons.helpers.DriverManager;
-import commons.helpers.testDataHelper;
+import commons.helpers.TestDataHelper;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -26,7 +27,7 @@ public class LoginSteps {
 
     @Given("The user access {string}")
     public void theUserAccessIntoNopcommerceWebpage(String webName) {
-        String url = testDataHelper.getData(webName.replace(" ","_"));
+        String url = TestDataHelper.getData(webName.replace(" ","_"));
         System.out.println();
         DriverManager.getDriver().get(url);
     }
@@ -69,5 +70,13 @@ public class LoginSteps {
     @When("The user enter {string} into email field and move to {string} field")
     public void theUserEnterIntoEmailFieldAndMoveToField(String emailAddress, String password) {
         loginPage.enterLoginForm(emailAddress,null);
+    }
+
+    @And("the user logins application {string} with {string} and {string}")
+    public void the_user_logins_application_with_username_and_password(String applicationName, String username, String password) {
+        theUserAccessIntoNopcommerceWebpage(applicationName);
+        loginPage.clickLoginButton();
+        loginPage.enterLoginForm(username, password);
+        loginPage.clickLoginButton();
     }
 }
