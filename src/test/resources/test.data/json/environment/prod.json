@@ -1,0 +1,13 @@
+{
+  "url": {
+    "nopcommerce": "https://www.nopcommerce.com/"
+  },
+  "credentials": {
+    "user": {
+      "anna_username": "anna@gmail.com"
+    },
+    "admin": {
+      "admin_username": "admin"
+    }
+  }
+}

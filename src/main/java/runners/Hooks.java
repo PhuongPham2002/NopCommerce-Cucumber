@@ -14,6 +14,7 @@ import org.openqa.selenium.WebDriver;
 import java.io.ByteArrayInputStream;
 
 public class Hooks {
+    public static final String TEST_LANGUAGE = System.getProperty("language", "english");
     WebDriver driver;
     ScenarioContext context;
     public final static String TEST_ENV = System.getProperty("testEnv", "dev");

@@ -11,6 +11,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.By;
 import org.testng.Assert;
 
 import java.util.List;
@@ -30,6 +31,11 @@ public class LoginSteps {
     public void theUserAccessIntoNopcommerceWebpage(String webName) {
         String url = TestDataHelper.getData(webName.replace(" ", "_"));
         DriverManager.getDriver().get(url);
+        verifyNavigationHasProductText(TestDataHelper.getData("product"));
+    }
+
+    private void verifyNavigationHasProductText(String product) {
+        DriverManager.getBrowserDriver().findElement(By.xpath(String.format("//li[contains(@class,\"navigation-top\")]/*[text()=\"%s\"]", product))).isDisplayed();
     }
 
     @Given("The user is on the login page")

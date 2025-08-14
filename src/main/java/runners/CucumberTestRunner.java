@@ -21,7 +21,6 @@ import java.util.Properties;
                 "rerun:target/failed.txt",
                 "io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm"},
         dryRun = false,
-        tags = "@MyAccount",
         monochrome = true
 )
 public class CucumberTestRunner extends AbstractTestNGCucumberTests{

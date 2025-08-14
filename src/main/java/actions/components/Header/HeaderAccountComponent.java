@@ -6,6 +6,8 @@ import commons.base.BasePage;
 import interfaces.componentUI.header.HeaderAccountComponentUI;
 import org.openqa.selenium.WebDriver;
 
+import static interfaces.componentUI.header.HeaderAccountComponentUI.ACCOUNT_LINK;
+
 public class HeaderAccountComponent extends BasePage {
 
     public HeaderAccountComponent(WebDriver driver) {
@@ -38,13 +40,13 @@ public class HeaderAccountComponent extends BasePage {
     }
 
     public void clickLoginLink() {
-        waitForElementClickable(HeaderAccountComponentUI.LOGIN_LINK);
+        waitForElementClickable(HeaderAccountComponentUI.defineElementLocatorBasedOnLanguage().get(ACCOUNT_LINK));
         clickElement(HeaderAccountComponentUI.LOGIN_LINK);
     }
 
     public void clickMyAccountLink() {
-        waitForElementClickable(HeaderAccountComponentUI.ACCOUNT_LINK);
-        clickElement(HeaderAccountComponentUI.ACCOUNT_LINK);
+        waitForElementClickable(ACCOUNT_LINK);
+        clickElement(ACCOUNT_LINK);
     }
 
 }
