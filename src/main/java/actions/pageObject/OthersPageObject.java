@@ -7,7 +7,7 @@ public class OthersPageObject extends BasePage {
     WebDriver driver;
 
     public OthersPageObject(WebDriver driver) {
-        this.driver= driver;
+        super(driver);
     }
 
 }

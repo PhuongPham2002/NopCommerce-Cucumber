@@ -8,13 +8,13 @@ public class SortProductComponent extends BasePage {
     WebDriver driver;
 
     public SortProductComponent(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
 
     public void selectSortOption(String sortOption) {
-        waitForElementClickable(driver, SortProductsComponentUI.SELECT_SORT_TYPE);
+        waitForElementClickable(SortProductsComponentUI.SELECT_SORT_TYPE);
 
-        selectDropdownOption(driver, SortProductsComponentUI.SELECT_SORT_TYPE,sortOption);
+        selectDropdownOption(SortProductsComponentUI.SELECT_SORT_TYPE, sortOption);
 
 
     }

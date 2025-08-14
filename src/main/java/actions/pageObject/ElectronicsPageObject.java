@@ -7,7 +7,7 @@ public class ElectronicsPageObject extends BasePage {
     WebDriver driver;
 
     public ElectronicsPageObject(WebDriver driver) {
-        this.driver= driver;
+        super(driver);
     }
 
 }

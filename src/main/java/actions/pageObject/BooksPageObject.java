@@ -7,7 +7,7 @@ public class BooksPageObject extends BasePage {
     WebDriver driver;
 
     public BooksPageObject(WebDriver driver) {
-        this.driver= driver;
+        super(driver);
     }
 
 }

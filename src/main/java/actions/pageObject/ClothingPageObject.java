@@ -7,7 +7,7 @@ public class ClothingPageObject extends BasePage {
     WebDriver driver;
 
     public ClothingPageObject(WebDriver driver) {
-        this.driver= driver;
+        super(driver);
     }
 
 }

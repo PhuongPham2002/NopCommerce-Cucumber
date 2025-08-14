@@ -7,7 +7,7 @@ public class ApparelPageObject extends BasePage {
     WebDriver driver;
 
     public ApparelPageObject(WebDriver driver) {
-        this.driver= driver;
+        super(driver);
     }
 
 }

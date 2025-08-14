@@ -7,7 +7,6 @@ import interfaces.componentUI.footer.FooterComponentUI;
 import org.openqa.selenium.WebDriver;
 
 public class FooterComponent extends BasePage {
-    WebDriver driver;
     public CustomerServiceComponent customerService;
     public InformationComponent information;
     public MyAccountComponent myAccount;
@@ -15,7 +14,7 @@ public class FooterComponent extends BasePage {
     public NewLetterComponent newLetter;
 
     public FooterComponent(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
         this.customerService = new CustomerServiceComponent(driver);
         this.information = new InformationComponent(driver);
         this.myAccount = new MyAccountComponent(driver);
@@ -26,8 +25,8 @@ public class FooterComponent extends BasePage {
 
 
     public SearchPageObject clickSearchLink(String category, String subList) {
-        waitForElementClickable(driver, FooterComponentUI.DYNAMIC_FOOTER_CATEGORY_LINK,category,subList);
-        clickElement(driver,FooterComponentUI.DYNAMIC_FOOTER_CATEGORY_LINK,category,subList);
+        waitForElementClickable(FooterComponentUI.DYNAMIC_FOOTER_CATEGORY_LINK,category,subList);
+        clickElement(FooterComponentUI.DYNAMIC_FOOTER_CATEGORY_LINK,category,subList);
         return PageGenerator.getSearchPage(driver);
     }
 }

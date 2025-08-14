@@ -8,12 +8,12 @@ public class CustomerServiceComponent extends BasePage {
     WebDriver driver;
 
     public CustomerServiceComponent(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
 
 
     public void clickCustomerServiceLink(String customerServiceItem) {
-        waitForElementClickable(driver, CustomerServiceComponentUI.DYNAMIC_CUSTOMER_SERVICE_LINK,customerServiceItem);
-        clickElement(driver,CustomerServiceComponentUI.DYNAMIC_CUSTOMER_SERVICE_LINK,customerServiceItem);
+        waitForElementClickable(CustomerServiceComponentUI.DYNAMIC_CUSTOMER_SERVICE_LINK,customerServiceItem);
+        clickElement(CustomerServiceComponentUI.DYNAMIC_CUSTOMER_SERVICE_LINK,customerServiceItem);
     }
 }

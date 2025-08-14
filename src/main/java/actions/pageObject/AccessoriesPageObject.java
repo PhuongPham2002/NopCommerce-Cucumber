@@ -7,7 +7,7 @@ public class AccessoriesPageObject extends BasePage {
     WebDriver driver;
 
     public AccessoriesPageObject(WebDriver driver) {
-        this.driver= driver;
+        super(driver);
     }
 
 }

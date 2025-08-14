@@ -7,13 +7,11 @@ import interfaces.pageUI.HomePageUI;
 import org.openqa.selenium.WebDriver;
 
 public class HomePageObject extends BasePage {
-    WebDriver driver;
     HeaderComponent header;
 
 
     public HomePageObject(WebDriver driver) {
-
-        this.driver = driver;
+        super(driver);
         this.header = new HeaderComponent(driver);
     }
 
@@ -24,8 +22,8 @@ public class HomePageObject extends BasePage {
     }
 
     public String getSuccessfulRegisterMessage() {
-        waitForElementVisible(driver,HomePageUI.SUCCESSFUL_REGISTER_MESSAGE);
-        return getElementText(driver,HomePageUI.SUCCESSFUL_REGISTER_MESSAGE);
+        waitForElementVisible(HomePageUI.SUCCESSFUL_REGISTER_MESSAGE);
+        return getElementText(HomePageUI.SUCCESSFUL_REGISTER_MESSAGE);
     }
 
     public LoginPageObject clickLoginLink() {

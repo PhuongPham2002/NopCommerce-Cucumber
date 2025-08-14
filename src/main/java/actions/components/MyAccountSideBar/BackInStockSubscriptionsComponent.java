@@ -7,6 +7,6 @@ public class BackInStockSubscriptionsComponent extends BasePage {
     WebDriver driver;
 
     public BackInStockSubscriptionsComponent(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
 }

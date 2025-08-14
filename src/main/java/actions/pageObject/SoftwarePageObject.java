@@ -7,7 +7,7 @@ public class SoftwarePageObject extends BasePage {
     WebDriver driver;
 
     public SoftwarePageObject(WebDriver driver) {
-        this.driver= driver;
+        super(driver);
     }
 
 }

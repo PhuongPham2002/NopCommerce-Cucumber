@@ -12,13 +12,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CompareProductsListPageObject extends BasePage {
-    WebDriver driver;
     HeaderComponent header;
     FooterComponent footer;
     public static final String NO_ITEM_TO_COMPARE_MESSAGE="You have no items to compare.";
 
     public CompareProductsListPageObject(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
         this.header = new HeaderComponent(driver);
         this.footer=new FooterComponent(driver);
     }
@@ -26,9 +25,9 @@ public class CompareProductsListPageObject extends BasePage {
     public boolean isProductNameContained(String productName) {
         try{
         waitForLoadingIconInvisible(driver);
-        waitForNumberOfElementsTobe(driver, CompareProductListPageUI.PRODUCT_NAME,2);
-        waitForListElementsVisible(driver,CompareProductListPageUI.PRODUCT_NAME);
-        List<WebElement> listElement = getListElement(driver,CompareProductListPageUI.PRODUCT_NAME);
+            waitForNumberOfElementsTobe(CompareProductListPageUI.PRODUCT_NAME, 2);
+            waitForListElementsVisible(CompareProductListPageUI.PRODUCT_NAME);
+            List<WebElement> listElement = getListElement(CompareProductListPageUI.PRODUCT_NAME);
         List<String> productNames = new ArrayList<>();
         for (WebElement element:listElement){
             productNames.add(element.getText().trim());
@@ -41,27 +40,27 @@ public class CompareProductsListPageObject extends BasePage {
 
     public String getProductPrice(int productPlace) {
         waitForLoadingIconInvisible(driver);
-        waitForNumberOfElementsTobe(driver, CompareProductListPageUI.ALL_PRODUCT_PRICE,2);
-        waitForListElementsVisible(driver,CompareProductListPageUI.ALL_PRODUCT_PRICE);
-        return getElementText(driver, CompareProductListPageUI.DYNAMIC_PRODUCT_PRICE,String.valueOf(productPlace));
+        waitForNumberOfElementsTobe(CompareProductListPageUI.ALL_PRODUCT_PRICE, 2);
+        waitForListElementsVisible(CompareProductListPageUI.ALL_PRODUCT_PRICE);
+        return getElementText(CompareProductListPageUI.DYNAMIC_PRODUCT_PRICE, String.valueOf(productPlace));
     }
 
 
     public String getScreenSizePrice(int productPlace) {
-        waitForNumberOfElementsTobe(driver, CompareProductListPageUI.ALL_PRODUCT_SCREENS_SIZE,2);
-        waitForListElementsVisible(driver,CompareProductListPageUI.ALL_PRODUCT_SCREENS_SIZE);
-        return getElementText(driver, CompareProductListPageUI.DYNAMIC_PRODUCT_SCREEN_SIZE,String.valueOf(productPlace));
+        waitForNumberOfElementsTobe(CompareProductListPageUI.ALL_PRODUCT_SCREENS_SIZE, 2);
+        waitForListElementsVisible(CompareProductListPageUI.ALL_PRODUCT_SCREENS_SIZE);
+        return getElementText(CompareProductListPageUI.DYNAMIC_PRODUCT_SCREEN_SIZE, String.valueOf(productPlace));
     }
 
     public void clickClearListButton() {
-        waitForElementClickable(driver,CompareProductListPageUI.CLEAR_LIST_BUTTON);
-        clickElement(driver,CompareProductListPageUI.CLEAR_LIST_BUTTON);
+        waitForElementClickable(CompareProductListPageUI.CLEAR_LIST_BUTTON);
+        clickElement(CompareProductListPageUI.CLEAR_LIST_BUTTON);
     }
 
     public String getNoItemsToCompareMessage() {
         waitForLoadingIconInvisible(driver);
-        waitForTextToBePresentInElement(driver,CompareProductListPageUI.NO_ITEMS_TO_COMPARE_MESSAGE,NO_ITEM_TO_COMPARE_MESSAGE);
-        return getElementText(driver,CompareProductListPageUI.NO_ITEMS_TO_COMPARE_MESSAGE);
+        waitForTextToBePresentInElement(CompareProductListPageUI.NO_ITEMS_TO_COMPARE_MESSAGE, NO_ITEM_TO_COMPARE_MESSAGE);
+        return getElementText(CompareProductListPageUI.NO_ITEMS_TO_COMPARE_MESSAGE);
 
     }
     public BasePage hoverToHeaderProductCategoryAndClickToSubCategoryVisible(String productCategory,String subProductCategory) {

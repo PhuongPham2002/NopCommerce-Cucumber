@@ -5,23 +5,22 @@ import interfaces.componentUI.NotificationBarComponentUI;
 import org.openqa.selenium.WebDriver;
 
 public class NotificationBarComponent extends BasePage {
-    WebDriver driver;
     public NotificationBarComponent(WebDriver driver){
-        this.driver=driver;
+        super(driver);
     }
 
     public String getNotificationMessage(String message) {
         waitForLoadingIconInvisible(driver);
-        waitForTextToBePresentInElement(driver, NotificationBarComponentUI.NOTIFICATION_MESSAGE,message);
-        return getElementText(driver,NotificationBarComponentUI.NOTIFICATION_MESSAGE);
+        waitForTextToBePresentInElement(NotificationBarComponentUI.NOTIFICATION_MESSAGE, message);
+        return getElementText(NotificationBarComponentUI.NOTIFICATION_MESSAGE);
 
     }
     public void closeNotification(){
-        waitForElementClickable(driver,NotificationBarComponentUI.CLOSE_BUTTON);
-        clickElement(driver,NotificationBarComponentUI.CLOSE_BUTTON);
+        waitForElementClickable(NotificationBarComponentUI.CLOSE_BUTTON);
+        clickElement(NotificationBarComponentUI.CLOSE_BUTTON);
     }
     public void waitForNotificationToDisappear(){
-        waitForElementInvisible(driver,NotificationBarComponentUI.NOTIFICATION_BAR);
+        waitForElementInvisible(NotificationBarComponentUI.NOTIFICATION_BAR);
     }
 
 

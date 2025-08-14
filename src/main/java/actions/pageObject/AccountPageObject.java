@@ -7,7 +7,7 @@ public class AccountPageObject extends BasePage {
     WebDriver driver;
 
     public AccountPageObject(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
 
 }
