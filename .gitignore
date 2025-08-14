@@ -4,8 +4,6 @@ target/
 !**/src/test/**/target/
 
 ### IntelliJ IDEA ###
-.idea/
-allure-results/
 
 ### Eclipse ###
 .apt_generated
@@ -36,3 +34,4 @@ build/
 logs/
 ### ALLURE ###
 allure-results/
+/.idea/
