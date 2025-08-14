@@ -1,6 +1,5 @@
 package commons.helpers;
 
-import commons.constants.GlobalConstants;
 import io.cucumber.core.exception.CucumberException;
 import org.apache.commons.lang3.RandomStringUtils;
 import runners.Hooks;
