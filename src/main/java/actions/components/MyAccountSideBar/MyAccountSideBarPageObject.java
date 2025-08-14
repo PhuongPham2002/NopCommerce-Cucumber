@@ -1,8 +1,8 @@
 package actions.components.MyAccountSideBar;
+
 import actions.pageObject.PageGenerator;
 import commons.base.BasePage;
 import interfaces.componentUI.myAccountSideBar.MyAccountSideBarPageUI;
-import org.apache.logging.log4j.core.config.Order;
 import org.openqa.selenium.WebDriver;
 
 public class MyAccountSideBarPageObject extends BasePage {
@@ -18,7 +18,7 @@ public class MyAccountSideBarPageObject extends BasePage {
 
 
     public MyAccountSideBarPageObject(WebDriver driver){
-        this.driver = driver;
+        super(driver);
         customerInfo= new CustomerInfoComponent(driver);
         addresses = new AddressesComponent(driver);
         backInStockSubscriptions = new BackInStockSubscriptionsComponent(driver);
@@ -29,19 +29,19 @@ public class MyAccountSideBarPageObject extends BasePage {
         rewardPoints = new RewardPointsComponent(driver);
     }
     public String getMyAccountSideBarItemPageTitle(String pageName){
-        waitForElementVisible(driver,MyAccountSideBarPageUI.MY_ACCOUNT_SIDEBAR_ITEM_PAGE_TITLE,pageName);
-        return getElementText(driver,MyAccountSideBarPageUI.MY_ACCOUNT_SIDEBAR_ITEM_PAGE_TITLE,pageName);
+        waitForElementVisible(MyAccountSideBarPageUI.MY_ACCOUNT_SIDEBAR_ITEM_PAGE_TITLE, pageName);
+        return getElementText(MyAccountSideBarPageUI.MY_ACCOUNT_SIDEBAR_ITEM_PAGE_TITLE, pageName);
     }
     public boolean isMyAccountSideBarItemActive(String pageName){
-        waitForElementVisible(driver,MyAccountSideBarPageUI.MY_ACCOUNT_SIDEBAR_ITEM_ACTIVE);
-        String activePageName = getElementText(driver,MyAccountSideBarPageUI.MY_ACCOUNT_SIDEBAR_ITEM_ACTIVE);
+        waitForElementVisible(MyAccountSideBarPageUI.MY_ACCOUNT_SIDEBAR_ITEM_ACTIVE);
+        String activePageName = getElementText(MyAccountSideBarPageUI.MY_ACCOUNT_SIDEBAR_ITEM_ACTIVE);
         return activePageName.equalsIgnoreCase(pageName);
     }
 
     public BasePage navigateToMyAccountSideBarMenu (String pageName){
-        waitForElementClickable(driver,MyAccountSideBarPageUI.MY_ACCOUNT_SIDEBAR_MENU_BY_TEXT,pageName);
+        waitForElementClickable(MyAccountSideBarPageUI.MY_ACCOUNT_SIDEBAR_MENU_BY_TEXT, pageName);
         if (!isMyAccountSideBarItemActive(pageName)){
-            clickElement(driver,MyAccountSideBarPageUI.MY_ACCOUNT_SIDEBAR_MENU_BY_TEXT,pageName);
+            clickElement(MyAccountSideBarPageUI.MY_ACCOUNT_SIDEBAR_MENU_BY_TEXT, pageName);
         }
         switch (pageName.toLowerCase()){
             case "customer info":

@@ -9,48 +9,47 @@ import interfaces.componentUI.myAccountSideBar.CustomerInfoPageUI;
 import org.openqa.selenium.WebDriver;
 
 public class CustomerInfoComponent extends BasePage {
-    WebDriver driver;
     NotificationBarComponent notification;
     HeaderComponent header;
 
     public CustomerInfoComponent(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
         this.notification = new NotificationBarComponent(driver);
         this.header = new HeaderComponent(driver);
     }
 
     public void checkGenderRadio(String gender) {
-        waitForElementVisible(driver, CustomerInfoPageUI.GENDER_RADIO,gender);
-        checkCheckboxOrRadio(driver,CustomerInfoPageUI.GENDER_RADIO,gender);
+        waitForElementVisible(CustomerInfoPageUI.GENDER_RADIO, gender);
+        checkCheckboxOrRadio(CustomerInfoPageUI.GENDER_RADIO, gender);
     }
     public String getGenderValue(String gender){
-        waitForElementVisible(driver,CustomerInfoPageUI.GENDER_RADIO_VALUE,gender);
-        return getElementText(driver,CustomerInfoPageUI.GENDER_RADIO_VALUE,gender);
+        waitForElementVisible(CustomerInfoPageUI.GENDER_RADIO_VALUE, gender);
+        return getElementText(CustomerInfoPageUI.GENDER_RADIO_VALUE, gender);
     }
 
     public void clickSaveButton() {
-        waitForElementClickable(driver,CustomerInfoPageUI.SAVE_BUTTON);
-        clickElement(driver,CustomerInfoPageUI.SAVE_BUTTON);
+        waitForElementClickable(CustomerInfoPageUI.SAVE_BUTTON);
+        clickElement(CustomerInfoPageUI.SAVE_BUTTON);
     }
     public String getTextboxValue(String idTextbox){
-      return getAttributeValueByID(driver,CustomerInfoPageUI.FIELD_TEXTBOX_BY_ID,"value",idTextbox);
+        return getAttributeValueByID(CustomerInfoPageUI.FIELD_TEXTBOX_BY_ID, "value", idTextbox);
 
     }
 
     public void checkNewLetterCheckbox() {
-        waitForElementVisible(driver,CustomerInfoPageUI.NEWSLETTER_CHECKBOX);
-        checkNativeCheckbox(driver,CustomerInfoPageUI.NEWSLETTER_CHECKBOX);
+        waitForElementVisible(CustomerInfoPageUI.NEWSLETTER_CHECKBOX);
+        checkNativeCheckbox(CustomerInfoPageUI.NEWSLETTER_CHECKBOX);
 
     }
 
     public void uncheckNewLetterCheckbox() {
-        waitForElementVisible(driver,CustomerInfoPageUI.NEWSLETTER_CHECKBOX);
-        uncheckNativeCheckbox(driver,CustomerInfoPageUI.NEWSLETTER_CHECKBOX);
+        waitForElementVisible(CustomerInfoPageUI.NEWSLETTER_CHECKBOX);
+        uncheckNativeCheckbox(CustomerInfoPageUI.NEWSLETTER_CHECKBOX);
     }
 
 
     public boolean isNewLetterChecked() {
-        return isElementSelected(driver,CustomerInfoPageUI.NEWSLETTER_CHECKBOX);
+        return isElementSelected(CustomerInfoPageUI.NEWSLETTER_CHECKBOX);
     }
     public String getUpdatedInfoMessage(String message){
         return notification.getNotificationMessage(message);
@@ -62,14 +61,14 @@ public class CustomerInfoComponent extends BasePage {
         return PageGenerator.getLoginPage(driver);
     }
     public String getErrorMessage(String fieldName){
-        waitForElementVisible(driver,CustomerInfoPageUI.DYNAMIC_ERROR_MESSAGE,fieldName);
-        return getElementText(driver,CustomerInfoPageUI.DYNAMIC_ERROR_MESSAGE,fieldName);
+        waitForElementVisible(CustomerInfoPageUI.DYNAMIC_ERROR_MESSAGE, fieldName);
+        return getElementText(CustomerInfoPageUI.DYNAMIC_ERROR_MESSAGE, fieldName);
 
     }
 
     public String getErrorMessage(){
-        waitForElementVisible(driver,CustomerInfoPageUI.EXISTING_EMAIL_MESSAGE);
-        return getElementText(driver,CustomerInfoPageUI.EXISTING_EMAIL_MESSAGE);
+        waitForElementVisible(CustomerInfoPageUI.EXISTING_EMAIL_MESSAGE);
+        return getElementText(CustomerInfoPageUI.EXISTING_EMAIL_MESSAGE);
 
     }
 }

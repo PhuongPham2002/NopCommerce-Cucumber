@@ -7,7 +7,7 @@ public class JewelryPageObject extends BasePage {
     WebDriver driver;
 
     public JewelryPageObject(WebDriver driver) {
-        this.driver= driver;
+        super(driver);
     }
 
 }

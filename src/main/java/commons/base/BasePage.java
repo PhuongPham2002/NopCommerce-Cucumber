@@ -2,12 +2,11 @@ package commons.base;
 
 import commons.constants.GlobalConstants;
 import commons.helpers.*;
-import interfaces.pageUI.BasePageUI;
+import interfaces.helperUI.WaitHelperUI;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.interactions.MoveTargetOutOfBoundsException;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
@@ -16,297 +15,598 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.function.Function;
 
+
 public class BasePage {
+    protected WebDriver driver;
     protected final Logger log = LogManager.getLogger(getClass());
 
-    public String formatLocator(String dynamicLocatorTemplate, String... dynamicParts ){
-        return LocatorHelper.formatLocator(dynamicLocatorTemplate, dynamicParts);
+    public BasePage(WebDriver driver) {
+        this.driver = driver;
+    }
+
+    public String formatLocator(String dynamicLocatorTemplate, String... dynamicParts) {
+        return String.format(dynamicLocatorTemplate, (Object[]) dynamicParts);
     }
 
     public By getByLocator(String rawLocator) {
-        return LocatorHelper.getByLocator(rawLocator);
-
-    }
-    public WebElement getElement (WebDriver driver, String rawLocator) {
-        return ElementHelper.getElement(driver,rawLocator);
-    }
-
-    public WebElement getElement (WebDriver driver, String dynamicLocatorTemplate,String...dynamicParts) {
-        return ElementHelper.getElement(driver, dynamicLocatorTemplate,dynamicParts);
-    }
-
-    public List<WebElement> getListElement (WebDriver driver, String rawLocator){
-        return ElementHelper.getListElement(driver,rawLocator);
-    }
-
-    public List<WebElement> getListElement (WebDriver driver, String dynamicLocatorTemplate, String...dynamicParts){
-        return ElementHelper.getListElement(driver,dynamicLocatorTemplate,dynamicParts);
-    }
-    public void clickElementWithLogging(WebDriver driver, String locatorForLog){
-        ElementHelper.clickElementWithLogging(driver,locatorForLog);
-
-    }
-    public void clickElement(WebDriver driver, String rawLocator){
-        ElementHelper.clickElement(driver,rawLocator);
-    }
-    public void clickElement(WebDriver driver, String dynamicLocatorTemplate, String...dynamicParts){
-        String locator = formatLocator(dynamicLocatorTemplate,dynamicParts);
-        ElementHelper.clickElementWithLogging(driver,locator);
-    }
-    public void sendKeyToElement(WebDriver driver, String rawLocator, String valueToSend){
-        ElementHelper.sendKeyToElement(driver,rawLocator,valueToSend);
-    }
-    public void sendKeyToElement(WebDriver driver,String dynamicLocatorTemplate,String valueToSend,String...dynamicParts){
-        ElementHelper.sendKeyToElement(driver, dynamicLocatorTemplate,valueToSend,dynamicParts);
-    }
-    public void clearKeyInElement(WebDriver driver,String rawLocator){
-        ElementHelper.clearKeyInElement(driver,rawLocator);
-    }
-
-    public void clearKeyInElement(WebDriver driver,String dynamicLocatorTemplate,String...dynamicParts){
-        ElementHelper.clearKeyInElement(driver,dynamicLocatorTemplate,dynamicParts);
-    }
-
-    public String getElementText(WebDriver driver, String rawLocator){
-        return ElementHelper.getElement(driver,rawLocator).getText();
-    }
-    public String getElementText(WebDriver driver, String dynamicLocatorTemplate,String... dynamicParts){
-        return ElementHelper.getElementText(driver,dynamicLocatorTemplate,dynamicParts);
-    }
-    public List<String> getListElementText(WebDriver driver,String rawLocator){
-        return ElementHelper.getListElementText(driver,rawLocator);
-    }
-
-    public String getDOMPropertyValue(WebDriver driver, String rawLocator, String attributeName){
-        return ElementHelper.getDOMPropertyValue(driver,rawLocator,attributeName);
-    }
-
-    public String getDOMPropertyValue(WebDriver driver, String dynamicLocatorTemplate, String attributeName, String... dynamicParts){
-        return ElementHelper.getDOMPropertyValue(driver,dynamicLocatorTemplate,attributeName,dynamicParts);
-    }
-
-    public String getAttributeValue(WebDriver driver, String rawLocator, String attributeName){
-        return ElementHelper.getAttributeValue(driver,rawLocator,attributeName);
-    }
-    public String getAttributeValue(WebDriver driver, String templateLocator, String attributeName, String...dynamicParts){
-        return ElementHelper.getAttributeValue(driver,templateLocator,attributeName,dynamicParts);
-    }
-
-
-    public int getListElementsSize(WebDriver driver, String rawLocator){
-        return ElementHelper.getListElementsSize(driver,rawLocator);
-    }
-    public int getListElementsSize(WebDriver driver, String dynamicLocatorTemplate,String... dynamicParts){
-        return ElementHelper.getListElementsSize(driver,dynamicLocatorTemplate,dynamicParts);
-    }
-
-    public void selectDropdownOption(WebDriver driver, String rawLocator, String option){
-            ElementHelper.selectDropdownOption(driver,rawLocator,option);
-
-    }
-    public static void waitForUrlContains(WebDriver driver,String valueToContain){
-        WaitHelper.waitForUrlContains(driver,valueToContain);
-    }
-    public void selectDropdownOption(WebDriver driver,String option, String dynamicLocatorTemplate,String... dynamicParts){
-       ElementHelper.selectDropdownOption(driver,option,dynamicLocatorTemplate,dynamicParts);
-    }
-
-    //public void selectMultipleDropdownOptions (WebDriver driver, String locator, String option)  --> khi làm làm đến dynamic locator thì mình apply
-    public void deselectDropdownOption(WebDriver driver, String rawLocator,String option){
-        ElementHelper.deselectDropdownOption(driver,rawLocator,option);
-    }
-    public void deselectDropdownOption(WebDriver driver,String option, String dynamicLocatorTemplate,String... dynamicParts){
-        ElementHelper.deselectDropdownOption(driver,option,dynamicLocatorTemplate,dynamicParts);
-    }
-
-    public String getSelectedDropdownOption(WebDriver driver, String rawLocator){
-        return ElementHelper.getSelectedDropdownOption(driver,rawLocator);
-    }
-
-    public String getSelectedDropdownOption(WebDriver driver, String dynamicLocatorTemplate,String... dynamicParts){
-        return ElementHelper.getSelectedDropdownOption(driver,dynamicLocatorTemplate,dynamicParts);
-    }
-    public List<String> getAllSelectedDropdownOptions(WebDriver driver, String locator){
-      return ElementHelper.getAllSelectedDropdownOptions(driver,locator);
-    }
-    public List<String> getOptions(WebDriver driver, String locator){
-        return ElementHelper.getOptions(driver,locator);
-    }
-    public boolean isDropdownMultiple(WebDriver driver, String locator){
-        return ElementHelper.isDropdownMultiple(driver,locator);
-    }
-    public void selectCustomizedDropdownOptions (WebDriver driver, String DropdownIconLocator, String optionsLocator, String option){
-      ElementHelper.selectCustomizedDropdownOptions(driver,DropdownIconLocator,optionsLocator,option);
-    }
-
-    public void checkNativeRadio(WebDriver driver, String rawLocator) {
-       ElementHelper.checkNativeRadio(driver,rawLocator);
-    }
-
-    public void checkNativeRadio(WebDriver driver, String templateLocator, String...dynamicParts) {
-        ElementHelper.checkNativeRadio(driver,templateLocator,dynamicParts);
-    }
-
-    public void uncheckNativeRadio(WebDriver driver, String templateLocator, String...dynamicParts) {
-        ElementHelper.uncheckNativeRadio(driver,templateLocator,dynamicParts);
-    }
-
-
-
-    public void checkNativeCheckbox(WebDriver driver, String rawLocator) {
-        ElementHelper.checkNativeCheckbox(driver,rawLocator);
-    }
-
-    public void checkNativeCheckbox(WebDriver driver, String templateLocator, String...dynamicParts) {
-       ElementHelper.checkNativeCheckbox(driver,templateLocator,dynamicParts);
-    }
-
-    public void checkCustomCheckbox (WebDriver driver, String rawLocator,String attributeName,String expectedAttributeValue){
-      ElementHelper.checkCustomCheckbox(driver,rawLocator,attributeName,expectedAttributeValue);
-    }
-
-    public void checkCustomRadio (WebDriver driver, String rawLocator,String attributeName,String expectedAttributeValue){
-      ElementHelper.checkCustomRadio(driver,rawLocator,attributeName,expectedAttributeValue);
-    }
-    public void checkCustomRadio (WebDriver driver, String rawLocator,String attributeName,String expectedAttributeValue,String...dynamicPart){
-        ElementHelper.checkCustomRadio(driver,rawLocator,attributeName,expectedAttributeValue,dynamicPart);
-    }
-
-    public void checkAllNativeCheckboxes(WebDriver driver, String rawLocator){
-      ElementHelper.checkAllNativeCheckboxes(driver,rawLocator);
-    }
-
-    public void checkAllCustomCheckboxes(WebDriver driver, String rawLocator,String attributeName,String expectedAttributeValue){
-       ElementHelper.checkAllCustomCheckboxes(driver,rawLocator,attributeName,expectedAttributeValue);
-    }
-
-
-    public void checkCheckboxOrRadio(WebDriver driver, String dynamicLocatorTemplate, String...dynamicParts) {
-     ElementHelper.checkCheckboxOrRadio(driver,dynamicLocatorTemplate,dynamicParts);
-    }
-
-
-
-    public void uncheckNativeCheckbox(WebDriver driver, String rawLocator) {
-       ElementHelper.uncheckNativeCheckbox(driver,rawLocator);
-    }
-
-    public void uncheckCustomCheckbox(WebDriver driver, String rawLocator) {
-        ElementHelper.uncheckCustomCheckbox(driver,rawLocator);
-    }
-
-    public boolean isElementDisplayed(WebDriver driver, String locator){
-        return ElementHelper.isElementDisplayed(driver,locator);
-    }
-    public boolean isElementEnable(WebDriver driver, String locator){
-        return ElementHelper.isElementEnable(driver,locator);
-    }
-    public boolean isElementSelected(WebDriver driver, String locator){
-        return ElementHelper.isElementSelected(driver,locator);
-    }
-
-    public void waitForElementVisible(WebDriver driver, String rawLocator){
-        WaitHelper.waitForElementVisible(driver,rawLocator);
-    }
-    public void waitForElementVisible(WebDriver driver, String dynamicLocatorTemplate, String...dynamicParts){
-        WaitHelper.waitForElementVisible(driver,dynamicLocatorTemplate,dynamicParts);
-    }
-    public void waitForListElementsVisible(WebDriver driver, String rawLocator){
-        WaitHelper.waitForElementVisible(driver,rawLocator);}
-    public void waitForListElementsVisible(WebDriver driver, String dynamicLocatorTemplate, String...dynamicParts){
-        WaitHelper.waitForListElementsVisible(driver,dynamicLocatorTemplate,dynamicParts);}
-
-    public void waitForElementInvisible (WebDriver driver, String dynamicLocatorTemplate, String...dynamicParts) {
-        WaitHelper.waitForElementInvisible(driver,dynamicLocatorTemplate,dynamicParts);}
-
-    public static void waitForElementInvisible (WebDriver driver, String rawLocator){
-        WaitHelper.waitForElementInvisible(driver,rawLocator);
-    }
-
-    public void waitForListElementInvisible (WebDriver driver, String rawLocator){
-        WaitHelper.waitForListElementInvisible(driver,rawLocator);}
-
-    public void waitForElementPresence (WebDriver driver, String rawlocator) {
-        WaitHelper.waitForElementPresence(driver,rawlocator);}
-
-    public void waitForElementPresence (WebDriver driver, String templateLocator, String...dynamicParts) {
-
-        WaitHelper.waitForElementPresence(driver,templateLocator,dynamicParts);
-    }
-    public void waitForListElementsPresence (WebDriver driver, String locator) {
-        WaitHelper.waitForListElementsPresence(driver,locator);}
-
-    public void waitForElementSelected (WebDriver driver, String rawLocator){
-        WaitHelper.waitForElementSelected(driver,rawLocator);
+        if (!rawLocator.contains("=")) {
+            throw new IllegalArgumentException("Invalid locator format (missing '=' character): " + rawLocator);
         }
-    public void waitForElementSelected (WebDriver driver, String dynamicLocatorTemplate, String...dynamicParts) {
-        WaitHelper.waitForElementSelected(driver,dynamicLocatorTemplate,dynamicParts);
-    }
-    public void waitForElementClickable(WebDriver driver, String rawLocator){
-        WaitHelper.waitForElementClickable(driver,rawLocator);
-    }
-    public void waitForElementClickable (WebDriver driver, WebElement element){
-        WaitHelper.waitForElementClickable(driver,element);
-    }
-    public void waitForElementClickable(WebDriver driver, String dynamicLocatorTemplate, String...dynamicParts){
-        WaitHelper.waitForElementClickable(driver,dynamicLocatorTemplate,dynamicParts);}
-
-    public void waitForTextToBePresentInElement(WebDriver driver,String rawLocator,String text){
-        WaitHelper.waitForTextToBePresentInElement(driver,rawLocator,text);}
-
-    public void waitForTextToBePresentInElement(WebDriver driver, WebElement element,String text){
-        WaitHelper.waitForTextToBePresentInElement(driver,element,text);
-    }
-
-    public void waitForTextToBePresentInElement(WebDriver driver,String dynamicLocatorTemplate,String text,String...dynamicParts){
-        WaitHelper.waitForTextToBePresentInElement(driver,dynamicLocatorTemplate,text,dynamicParts);
-    }
-    public void waitForAttributeToBe(WebDriver driver,String rawLocator,String attributeName, String value){
-        WaitHelper.waitForAttributeToBe(driver,rawLocator,attributeName,value);
+        if (rawLocator.toLowerCase().startsWith("xpath")) {
+            return By.xpath(rawLocator.substring(6));
+        } else if (rawLocator.toLowerCase().startsWith("css")) {
+            return By.cssSelector(rawLocator.substring(4));
+        } else if (rawLocator.toLowerCase().startsWith("id")) {
+            return By.id(rawLocator.substring(3));
+        } else if (rawLocator.toLowerCase().startsWith("name")) {
+            return By.name(rawLocator.substring(5));
+        } else if (rawLocator.toLowerCase().startsWith("tagname")) {
+            return By.tagName(rawLocator.substring(8));
+        } else if (rawLocator.toLowerCase().startsWith("linktext")) {  //bắt chính xác text của thẻ a
+            return By.linkText(rawLocator.substring(9));
+        } else if (rawLocator.toLowerCase().startsWith("partiallinktext")) {
+            return By.linkText(rawLocator.substring(16));
+        }
+        throw new IllegalArgumentException("Unsupported locator type:  " + rawLocator);
     }
 
-    public void enterTextboxByID(WebDriver driver,String dynamicLocatorTemplate,String valueToSend,String idTextboxValue){
-       waitForElementVisible(driver,dynamicLocatorTemplate,idTextboxValue);
-       sendKeyToElement(driver,dynamicLocatorTemplate,valueToSend,idTextboxValue);}
-
-
-    public String getAttributeValueByID(WebDriver driver,String dynamicLocatorTemplate,String attributeValue,String idTextboxValue){
-        waitForElementVisible(driver,dynamicLocatorTemplate,idTextboxValue);
-        return getDOMPropertyValue(driver,dynamicLocatorTemplate,attributeValue,idTextboxValue);}
-
-
-    public void hoverToElementWithLog(WebDriver driver,String locatorForLog){
-    ActionHelper.hoverToElementWithLog(driver,locatorForLog);
+    //Elements:
+    public WebElement getElement(String rawLocator) {
+        log.info("Attempting to find element with locator: {}",rawLocator);
+        WebElement element = driver.findElement(getByLocator(rawLocator));
+        log.info("Element found successfully");
+        return element ;
     }
 
-    public void hoverToElement(WebDriver driver,String rawLocator){
-        hoverToElementWithLog(driver,rawLocator);
-    }
-    public void hoverToElement(WebDriver driver,String templateLocator,String...dynamicParts){
-        String locatorForLog = formatLocator(templateLocator,dynamicParts);
-       hoverToElementWithLog(driver,locatorForLog);
-    }
-
-    //Bỏ
-    public void waitForLoadingScreenInvisible(WebDriver driver){
-        WaitHelper.waitForLoadingScreenInvisible(driver);
+    public WebElement getElement(String dynamicLocatorTemplate, String... dynamicParts) {
+        log.info("Attempting to find element with locator: " + formatLocator(dynamicLocatorTemplate,dynamicParts));
+        WebElement element = driver.findElement(getByLocator(formatLocator(dynamicLocatorTemplate, dynamicParts)));
+        log.info("Element found successfully");
+        return element;
     }
 
-    //BỎ - cân nhắc
-    public void waitForLoadingIconInvisible(WebDriver driver){
-        WaitHelper.waitForLoadingIconInvisible(driver);
+    public List<WebElement> getListElement(String rawLocator) {
+        log.info("Attempting to find list of elements with locator: " + rawLocator);
+        List<WebElement> listElements = driver.findElements(getByLocator(rawLocator));
+        log.info("List of elements found successfully");
+        return listElements;
     }
 
-    //BỎ - cân nhắc
-    public void waitForNumberOfElementsTobe(WebDriver driver, String rawLocator, int number){
-        WaitHelper.waitForNumberOfElementsTobe(driver,rawLocator,number);
+    public List<WebElement> getListElement(String dynamicLocatorTemplate, String... dynamicParts) {
+        log.info("Attempting to find list of elements with locator: " + formatLocator(dynamicLocatorTemplate,dynamicParts));
+        List<WebElement> listElements = driver.findElements(getByLocator(formatLocator(dynamicLocatorTemplate, dynamicParts)));
+        log.info("List of elements found successfully");
+        return listElements;
+    }
+
+    public void waitForExpectedConditionMet(Function<WebDriver, Boolean> innerText) {
+
+    }
+
+    //Click:
+
+    public void clickElement(String locatorForLog) {
+        log.info("Attempting to click element with locator: " + locatorForLog);
+        getElement(locatorForLog).click();
+        log.info("Element clicked successfully.");
     }
 
 
 
+    public void clickElement(String dynamicLocatorTemplate, String... dynamicParts) {
+        String locator = formatLocator(dynamicLocatorTemplate, dynamicParts);
+        log.info("Attempting to click element with locator: " + locator );
+        getElement(locator).click();
+        log.info("Element clicked successfully.");
+    }
+
+
+    public void sendKeyToElement(String rawLocator, String valueToSend) {
+        clearKeyInElement(rawLocator);
+        log.info("Attempting to send keys with locator: "+rawLocator);
+        getElement(rawLocator).sendKeys(valueToSend);
+        getElement(rawLocator).sendKeys(Keys.TAB);
+        log.info("Keys sent successfully.");
+    }
+
+    public void sendKeyToElement(String dynamicLocatorTemplate, String valueToSend, String... dynamicParts) {
+        clearKeyInElement(formatLocator(dynamicLocatorTemplate, dynamicParts));
+        log.info("Attempting to send keys with locator: "+formatLocator(dynamicLocatorTemplate, dynamicParts));
+        getElement(formatLocator(dynamicLocatorTemplate, dynamicParts)).sendKeys(valueToSend);
+        getElement(formatLocator(dynamicLocatorTemplate, dynamicParts)).sendKeys(Keys.TAB);
+        log.info("Keys sent successfully.");
+    }
+
+    public void clearKeyInElement(String rawLocator) {
+        log.info("Attempting to clear keys with locator: " + rawLocator);
+        getElement(rawLocator).sendKeys(Keys.CONTROL + "a");
+        getElement(rawLocator).sendKeys(Keys.DELETE);
+        log.info("Keys cleared successfully");
+    }
+
+    public void clearKeyInElement(String dynamicLocatorTemplate, String... dynamicParts) {
+        log.info("Attempting to clear keys with locator: " + formatLocator(dynamicLocatorTemplate,dynamicParts));
+        getElement(formatLocator(dynamicLocatorTemplate, dynamicParts)).sendKeys(Keys.CONTROL + "a");
+        getElement(formatLocator(dynamicLocatorTemplate, dynamicParts)).sendKeys(Keys.DELETE);
+        log.info("Keys cleared successfully.");
+    }
+
+    public String getElementText(String rawLocator) {
+        log.info("Attempting to retrieve text with locator: " +rawLocator);
+        String elementText = getElement(rawLocator).getText();
+        log.info("Text retrieved successfully from element.");
+        return elementText;
+    }
+
+    public String getElementText(String dynamicLocatorTemplate, String... dynamicParts) {
+        log.info("Attempting to retrieve text with locator: " + formatLocator(dynamicLocatorTemplate,dynamicParts));
+        String elementText = getElement(formatLocator(dynamicLocatorTemplate,dynamicParts)).getText();
+        log.info("Text retrieved successfully from element.");
+        return elementText;
+    }
+
+    public List<String> getListElementText(String rawLocator) {
+        log.info("Attempting to retrieve text of list elements with locator: " + rawLocator);
+        List<WebElement> listElements = getListElement(rawLocator);
+        List<String> listElementsText = new ArrayList<>();
+        for (WebElement element : listElements) {
+            log.info("Attempting to retrieve text of element: " + element);
+            listElementsText.add(element.getText().trim());
+        }
+        log.info("Text retrieved successfully from elements: " + listElements.size());
+        return listElementsText;
+    }
+
+    public String getDOMPropertyValue(String rawLocator, String attributeName) {
+        log.info("Attempting to retrieve property value with locator: "+rawLocator);
+        String propertyValue = getElement(rawLocator).getDomProperty(attributeName);
+        log.info("Property value retrieved successfully from element");
+        return propertyValue;
+    }
+
+    public String getDOMPropertyValue(String dynamicLocatorTemplate, String attributeName, String... dynamicParts) {
+        return getElement(formatLocator(dynamicLocatorTemplate, dynamicParts)).getDomProperty(attributeName);
+    }
+
+    public String getAttributeValue(String rawLocator, String attributeName) {
+        return getElement(rawLocator).getDomAttribute(attributeName);
+    }
+
+    public String getAttributeValue(String templateLocator, String attributeName, String... dynamicParts) {
+        return getElement(formatLocator(templateLocator, dynamicParts)).getDomAttribute(attributeName);
+    }
+
+
+    public int getListElementsSize(String rawLocator) {
+        return getListElement(rawLocator).size();
+    }
+
+    public int getListElementsSize(String dynamicLocatorTemplate, String... dynamicParts) {
+        return getListElement(formatLocator(dynamicLocatorTemplate, dynamicParts)).size();
+    }
+
+    public void selectDropdownOption(String rawLocator, String option) {
+        new Select(getElement(rawLocator)).selectByVisibleText(option);
+
+    }
+
+
+    public void selectDropdownOption(String option, String dynamicLocatorTemplate, String... dynamicParts) {
+        new Select(getElement(formatLocator(dynamicLocatorTemplate, dynamicParts))).selectByVisibleText(option);
+    }
+
+    //public void selectMultipleDropdownOptions ( String locator, String option)  --> khi làm làm đến dynamic locator thì mình apply
+    public void deselectDropdownOption(String rawLocator, String option) {
+        new Select(getElement(rawLocator)).deselectByVisibleText(option);
+    }
+
+    public void deselectDropdownOption(String option, String dynamicLocatorTemplate, String... dynamicParts) {
+        new Select(getElement(formatLocator(dynamicLocatorTemplate, dynamicParts))).deselectByVisibleText(option);
+    }
+
+    public String getSelectedDropdownOption(String rawLocator) {
+        return new Select(getElement(rawLocator)).getFirstSelectedOption().getText();
+    }
+
+    public String getSelectedDropdownOption(String dynamicLocatorTemplate, String... dynamicParts) {
+        String value = "chưa implement method";
+        return value;
+    }
+
+    public List<String> getAllSelectedDropdownOptions(String locator) {
+        List<WebElement> allSelectedOptions = new Select(getElement(locator)).getAllSelectedOptions();
+        List<String> selectedOptions = new ArrayList<String>();
+        for (WebElement option : allSelectedOptions) {
+            selectedOptions.add(option.getText());
+        }
+        return selectedOptions;
+    }
+
+    public List<String> getOptions(String locator) {
+        List<WebElement> allDropdownOptions = new Select(getElement(locator)).getOptions();
+        List<String> dropdownOptions = new ArrayList<String>();
+        for (WebElement option : allDropdownOptions) {
+            dropdownOptions.add(option.getText());
+        }
+        return dropdownOptions;
+    }
+
+    public boolean isDropdownMultiple(String locator) {
+        return new Select(getElement(locator)).isMultiple();
+    }
+
+    public void selectCustomizedDropdownOptions(String DropdownIconLocator, String optionsLocator, String option) {
+        //CLick vào drop down icon
+        clickElement(DropdownIconLocator);
+        //Lấy về list các options
+        List<WebElement> allDropdownOptions = getListElement(optionsLocator);
+        for (WebElement dropdownOption : allDropdownOptions) {
+            if (dropdownOption.getText().trim().equals(option)) {
+                dropdownOption.click();
+                break;
+            }
+        }
+    }
+
+    public void checkNativeRadio(String rawLocator) {
+        if (!getElement(rawLocator).isSelected()) {
+            getElement(rawLocator).click();
+            log.info("Radio Selected (native): " + rawLocator);
+        } else {
+            log.info("Radio already selected (native), skip click: " + rawLocator);
+        }
+    }
+
+    public void checkNativeRadio(String templateLocator, String... dynamicParts) {
+        if (!getElement(templateLocator, dynamicParts).isSelected()) {
+            getElement(templateLocator, dynamicParts).click();
+            log.info("Radio Selected (native): " + formatLocator(templateLocator, dynamicParts));
+        } else {
+            log.info("Radio already selected (native), skip click: " + formatLocator(templateLocator, dynamicParts));
+        }
+    }
+
+    public void uncheckNativeRadio(String rawLocator) {
+        if (getElement(rawLocator).isSelected()) {
+            getElement(rawLocator).click();
+            log.info("Radio unselected (native): " + rawLocator);
+        } else {
+            log.info("Radio already unselected (native), skip click: " + rawLocator);
+        }
+    }
+
+    public void uncheckNativeRadio(String templateLocator, String... dynamicParts) {
+        if (getElement(formatLocator(templateLocator, dynamicParts)).isSelected()) {
+            getElement(formatLocator(templateLocator, dynamicParts)).click();
+            log.info("Radio unselected (native): " + formatLocator(templateLocator, dynamicParts));
+        } else {
+            log.info("Radio already unselected (native), skip click: " + formatLocator(templateLocator, dynamicParts));
+        }
+    }
+
+
+    public void checkNativeCheckbox(String rawLocator) {
+        if (!getElement(rawLocator).isSelected()) {
+            getElement(rawLocator).click();
+            log.info("Checkbox Selected (native): " + rawLocator);
+        } else {
+            log.info("Checkbox already selected (native), skip click: " + rawLocator);
+        }
+    }
+
+    public void checkNativeCheckbox(String templateLocator, String... dynamicParts) {
+        if (!getElement(templateLocator, dynamicParts).isSelected()) {
+            getElement(templateLocator, dynamicParts).click();
+            log.info("Checkbox Selected (native): " + formatLocator(templateLocator, dynamicParts));
+        } else {
+            log.info("Checkbox already selected (native), skip click: " + formatLocator(templateLocator, dynamicParts));
+        }
+    }
+
+    public void checkCustomCheckbox(String rawLocator, String attributeName, String expectedAttributeValue) {
+        String attributeValue = getDOMPropertyValue(rawLocator, attributeName);
+        if (attributeValue == null || !attributeValue.contains(expectedAttributeValue)) {
+            getElement(rawLocator).click();
+            log.info("Checkbox Selected (custom): " + rawLocator);
+        } else {
+            log.info("Checkbox  already selected (custom), skip click: " + rawLocator);
+        }
+    }
+
+    public void checkCustomRadio(String rawLocator, String attributeName, String expectedAttributeValue) {
+        String attributeValue = getDOMPropertyValue(rawLocator, attributeName);
+        if (attributeValue == null || !attributeValue.contains(expectedAttributeValue)) {
+            getElement(rawLocator).click();
+            log.info("Radio Selected (custom): " + rawLocator);
+        } else {
+            log.info("Radio already selected (custom), skip click: " + rawLocator);
+        }
+    }
+
+    public void checkCustomRadio(String templateDynamicLocator, String attributeName, String expectedAttributeValue, String... dynamicParts) {
+
+        String attributeValue = getDOMPropertyValue(formatLocator(templateDynamicLocator, dynamicParts), attributeName);
+        if (attributeValue == null || !attributeValue.contains(expectedAttributeValue)) {
+            getElement(formatLocator(templateDynamicLocator, dynamicParts)).click();
+            log.info("Radio Selected (custom): " + formatLocator(templateDynamicLocator, dynamicParts));
+        } else {
+            log.info("Radio already selected (custom), skip click: " + formatLocator(templateDynamicLocator, dynamicParts));
+        }
+
+    }
+
+    public void checkAllNativeCheckboxes(String rawLocator) {
+        int numberOfCheckboxes = getListElementsSize(rawLocator);
+        for (int i = 0; i < numberOfCheckboxes; i++) {
+            List<WebElement> checkboxes = getListElement(rawLocator);
+            WebElement checkbox = checkboxes.get(i);
+            if (!checkbox.isSelected()) {
+                checkbox.click();
+                log.info("Checkbox [" + i + "] selected (native): " + rawLocator);
+            } else {
+                log.info("Checkbox [" + i + "] already selected (native), skip click: " + rawLocator);
+            }
+        }
+    }
+
+    public void checkAllCustomCheckboxes(String rawLocator, String attributeName, String expectedAttributeValue) {
+        int numberOfCheckboxes = getListElementsSize(rawLocator);
+        for (int i = 0; i < numberOfCheckboxes; i++) {
+            List<WebElement> checkboxes = getListElement(rawLocator);
+            WebElement checkbox = checkboxes.get(i);
+            String attributeValue = checkbox.getDomProperty(attributeName);
+            if (attributeValue == null || !attributeValue.contains(expectedAttributeValue)) {
+                checkbox.click();
+                log.info("Checkbox [" + i + "] selected (custom): " + rawLocator);
+            } else {
+                log.info("Checkbox [" + i + "] already selected (custom), skip click: " + rawLocator);
+            }
+        }
+    }
+
+
+    public void checkCheckboxOrRadio(String dynamicLocatorTemplate, String... dynamicParts) {
+        if (!getElement(formatLocator(dynamicLocatorTemplate, dynamicParts)).isSelected()) {
+            getElement(formatLocator(dynamicLocatorTemplate, dynamicParts)).click();
+        }
+    }
+
+
+    public void uncheckNativeCheckbox(String rawLocator) {
+        if (getElement(rawLocator).isSelected()) {
+            getElement(rawLocator).click();
+            log.info("Unchecked Checkbox(native) successfully: " + rawLocator);
+        } else {
+            log.info("Checkbox(native) is already unchecked: " + rawLocator);
+        }
+
+    }
+
+    public void uncheckCustomCheckbox(String rawLocator) {
+        //To write 
+    }
+
+    public boolean isElementDisplayed(String locator) {
+        return getElement(locator).isDisplayed();
+    }
+
+    public boolean isElementEnable(String locator) {
+        return getElement(locator).isEnabled();
+    }
+
+    public boolean isElementSelected(String locator) {
+        return getElement(locator).isSelected();
+    }
+
+    //Wait
+    public WebDriverWait getWebDriverWait(WebDriver driver) {
+        return new WebDriverWait(driver, Duration.ofSeconds(GlobalConstants.TIMEOUT));
+    }
+
+    public WebElement waitForElementVisible(String rawLocator) {
+        return getWebDriverWait(driver).until(ExpectedConditions.visibilityOfElementLocated(LocatorHelper.getByLocator(rawLocator)));
+    }
+
+    public WebElement waitForElementVisible(String dynamicLocatorTemplate, String... dynamicParts) {
+        return getWebDriverWait(driver).until(ExpectedConditions.visibilityOfElementLocated(LocatorHelper.getByLocator(LocatorHelper.formatLocator(dynamicLocatorTemplate, dynamicParts))));
+    }
+
+    public List<WebElement> waitForListElementsVisible(String rawLocator) {
+        return getWebDriverWait(driver).until(ExpectedConditions.visibilityOfAllElementsLocatedBy(LocatorHelper.getByLocator(rawLocator)));
+    }
+
+    public List<WebElement> waitForListElementsVisible(String dynamicLocatorTemplate, String... dynamicParts) {
+        return getWebDriverWait(driver).until(ExpectedConditions.visibilityOfAllElementsLocatedBy(LocatorHelper.getByLocator(LocatorHelper.formatLocator(dynamicLocatorTemplate, dynamicParts))));
+    }
+
+    public void waitForElementInvisible(String dynamicLocatorTemplate, String... dynamicParts) {
+        getWebDriverWait(driver).until(ExpectedConditions.invisibilityOfElementLocated(LocatorHelper.getByLocator(LocatorHelper.formatLocator(dynamicLocatorTemplate, dynamicParts))));
+    }
+
+    public void waitForElementInvisible(String rawLocator) {
+        getWebDriverWait(driver).until(ExpectedConditions.invisibilityOfElementLocated(LocatorHelper.getByLocator(rawLocator)));
+    }
+
+    public void waitForListElementInvisible(String rawLocator) {
+        List<WebElement> listElements = getListElement(rawLocator);
+        getWebDriverWait(driver).until(ExpectedConditions.invisibilityOfAllElements(listElements));
+    }
+
+    public void waitForElementPresence(String rawlocator) {
+        getWebDriverWait(driver).until(ExpectedConditions.presenceOfElementLocated(LocatorHelper.getByLocator(rawlocator)));
+    }
+
+    public void waitForElementPresence(String templateLocator, String... dynamicParts) {
+
+        getWebDriverWait(driver).until(ExpectedConditions.presenceOfElementLocated(LocatorHelper.getByLocator(LocatorHelper.formatLocator(templateLocator, dynamicParts))));
+    }
+
+    public void waitForListElementsPresence(String locator) {
+        getWebDriverWait(driver).until(ExpectedConditions.presenceOfAllElementsLocatedBy(LocatorHelper.getByLocator(locator)));
+    }
+
+    public void waitForElementSelected(String rawLocator) {
+        getWebDriverWait(driver).until(ExpectedConditions.elementToBeSelected(LocatorHelper.getByLocator(rawLocator)));
+    }
+
+    public void waitForElementSelected(String dynamicLocatorTemplate, String... dynamicParts) {
+        getWebDriverWait(driver).until(ExpectedConditions.elementToBeSelected(LocatorHelper.getByLocator(LocatorHelper.formatLocator(dynamicLocatorTemplate, dynamicParts))));
+    }
+
+    public void waitForElementClickable(String rawLocator) {
+        getWebDriverWait(driver).until(ExpectedConditions.elementToBeClickable(LocatorHelper.getByLocator(rawLocator)));
+    }
+
+    public void waitForElementClickable(WebElement element) {
+        getWebDriverWait(driver).until(ExpectedConditions.elementToBeClickable(element));
+    }
+
+    public void waitForElementClickable(String dynamicLocatorTemplate, String... dynamicParts) {
+        getWebDriverWait(driver).until(ExpectedConditions.elementToBeClickable(LocatorHelper.getByLocator(LocatorHelper.formatLocator(dynamicLocatorTemplate, dynamicParts))));
+    }
+
+    public void waitForTextToBePresentInElement(String rawLocator, String text) {
+        getWebDriverWait(driver).until(ExpectedConditions.textToBePresentInElementLocated(LocatorHelper.getByLocator(rawLocator), text));
+    }
+
+
+    public void waitForTextToBePresentInElement(WebElement element, String text) {
+        getWebDriverWait(driver).until(ExpectedConditions.textToBePresentInElement(element, text));
+
+    }
+
+    public void waitForTextToBePresentInElement(String dynamicLocatorTemplate, String text, String... dynamicParts) {
+        getWebDriverWait(driver).until(ExpectedConditions.textToBePresentInElementLocated(LocatorHelper.getByLocator(LocatorHelper.formatLocator(dynamicLocatorTemplate, dynamicParts)), text));
+    }
+
+    public void waitForAttributeToBe(String rawLocator, String attributeName, String value) {
+        getWebDriverWait(driver).until(ExpectedConditions.attributeToBe(LocatorHelper.getByLocator(rawLocator), attributeName, value));
+    }
+
+    public void enterTextboxByID(String dynamicLocatorTemplate, String valueToSend, String idTextboxValue) {
+        waitForElementVisible(dynamicLocatorTemplate, idTextboxValue);
+        sendKeyToElement(dynamicLocatorTemplate, valueToSend, idTextboxValue);
+    }
+
+    public void waitForUrlContains(String valueToContain) {
+        getWebDriverWait(driver).until(ExpectedConditions.urlContains(valueToContain));
+    }
+
+
+    public String getAttributeValueByID(String dynamicLocatorTemplate, String attributeValue, String idTextboxValue) {
+        waitForElementVisible(dynamicLocatorTemplate, idTextboxValue);
+        return getDOMPropertyValue(dynamicLocatorTemplate, attributeValue, idTextboxValue);
+    }
+
+
+    public void hoverToElementWithLog(String locatorForLog) {
+        log.info("Perform hover to element: " + locatorForLog);
+        new Actions(driver).moveToElement(getElement(locatorForLog)).perform();
+        log.info("Hover to element successfully");
+    }
+
+    public void hoverToElement(String rawLocator) {
+        hoverToElementWithLog(rawLocator);
+    }
+
+    public void hoverToElement(String templateLocator, String... dynamicParts) {
+        String locatorForLog = formatLocator(templateLocator, dynamicParts);
+        hoverToElementWithLog(locatorForLog);
+    }
+
+    public void waitForAttributeContains(String rawLocator, String attributeName, String valueToContain, String... dynamicParts) {
+        getWebDriverWait(driver).until(ExpectedConditions.attributeContains(LocatorHelper.getByLocator(LocatorHelper.formatLocator(rawLocator, dynamicParts)), attributeName, valueToContain));
+    }
+
+
+    public void waitForNumberOfElementsTobe(String rawLocator, int number) {
+        getWebDriverWait(driver).until(ExpectedConditions.numberOfElementsToBe(LocatorHelper.getByLocator(rawLocator), number));
+
+    }
+
+    public void waitForDomPropertyTobe(WebElement element, String value) {
+        getWebDriverWait(driver).until(ExpectedConditions.domPropertyToBe(element, "innerText", value));
+    }
+
+    public void waitForTextVisible(String templateLocator, String... dynamics) {
+        FluentWait<WebDriver> wait = new FluentWait<>(driver);
+        wait.withTimeout(Duration.ofSeconds(20));
+        wait.pollingEvery(Duration.ofMillis(500));
+        wait.ignoring(NoSuchElementException.class);
+        wait.ignoring(StaleElementReferenceException.class);
+        wait.until(new Function<WebDriver, Boolean>() {
+            @Override
+            public Boolean apply(WebDriver driver) {
+                String text = getDOMPropertyValue(templateLocator, "innerText", dynamics);
+                return text != null && !text.trim().isEmpty();
+            }
+
+            @Override
+            public String toString() {
+                return "waiting for non-empty innerText of element: " + LocatorHelper.formatLocator(templateLocator, dynamics);
+            }
+        });
+    }
+
+    public void waitForTextVisible(String templateLocator) {
+        FluentWait<WebDriver> wait = new FluentWait<>(driver);
+        wait.withTimeout(Duration.ofSeconds(10));
+        wait.pollingEvery(Duration.ofMillis(500));
+        wait.ignoring(NoSuchElementException.class);
+        wait.ignoring(StaleElementReferenceException.class);
+        wait.until(new Function<WebDriver, Boolean>() {
+            @Override
+            public Boolean apply(WebDriver driver) {
+                String text = getDOMPropertyValue(templateLocator, "innerText");
+                return text != null && !text.trim().isEmpty();
+            }
+
+            @Override
+            public String toString() {
+                return "waiting for non-empty innerText of element: " + LocatorHelper.getByLocator(templateLocator);
+            }
+        });
+    }
+
+    //Trong trường hợp không chắc có spinner hay không (có thể có hoặc không)
+    public void waitForSpinnerInvisibleOrSkipSpinner(WebDriver driver) {
+        FluentWait<WebDriver> wait = new FluentWait<>(driver);
+        wait.withTimeout(Duration.ofSeconds(10));
+        wait.pollingEvery(Duration.ofMillis(300));
+        wait.ignoring(NoSuchElementException.class);
+        wait.ignoring(StaleElementReferenceException.class);
+        try {
+            wait.until(new Function<WebDriver, Boolean>() {
+
+                @Override
+                public Boolean apply(WebDriver driver) {
+                    WebElement spinner = getElement(WaitHelperUI.LOADING_ICON);
+                    if (spinner.isDisplayed()) {
+                        log.info("Spinner display is still visible...");
+                    }
+                    return !spinner.isDisplayed();
+                }
+            });
+            log.info("Spinner already disappeared");
+        } catch (TimeoutException e) {
+            System.out.println("Spinner did not appear or disappear too fast");
+        }
+
+    }
+
+
+    // Trường hợp chắc chắn có spinner
+    public void waitForLoadingIconInvisible(WebDriver driver) {
+        waitForElementInvisible(WaitHelperUI.LOADING_ICON);
+    }
+
+    public void waitForLoadingScreenInvisible(WebDriver driver) {
+        waitForElementInvisible(WaitHelperUI.LOADING_SCREEN);
+    }
 
 
 }
+
+

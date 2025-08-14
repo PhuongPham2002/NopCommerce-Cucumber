@@ -1,11 +1,12 @@
 package actions.components.Footer;
 
+import commons.base.BasePage;
 import org.openqa.selenium.WebDriver;
 
-public class NewLetterComponent {
+public class NewLetterComponent extends BasePage {
     WebDriver driver;
 
     public NewLetterComponent(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
 }

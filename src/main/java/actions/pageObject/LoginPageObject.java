@@ -1,47 +1,54 @@
 package actions.pageObject;
 
 import commons.base.BasePage;
+import interfaces.pageUI.HomePageUI;
 import interfaces.pageUI.LoginPageUI;
 import org.openqa.selenium.WebDriver;
 
 public class LoginPageObject extends BasePage {
-    WebDriver driver;
 
     public LoginPageObject(WebDriver driver) {
-
-        this.driver = driver;
+        super(driver);
     }
 
 
     public HomePageObject clickLoginButton() {
-        waitForElementClickable(driver, LoginPageUI.LOGIN_BUTTON);
-        clickElement(driver,LoginPageUI.LOGIN_BUTTON);
+        waitForElementClickable(LoginPageUI.LOGIN_BUTTON);
+        clickElement(LoginPageUI.LOGIN_BUTTON);
         return PageGenerator.getHomePage(driver);
+
     }
 
-    public void enterLoginForm(String emailAddress, String password){
-        if (emailAddress != null){
-        enterTextboxByID(driver,LoginPageUI.LOGIN_FORM_TEXTBOX_ID,emailAddress,"Email");
+    public void enterLoginForm(String emailAddress, String password) {
+        if (emailAddress != null) {
+            enterTextboxByID(LoginPageUI.LOGIN_FORM_TEXTBOX_ID, emailAddress, "Email");
         }
         if (password != null) {
-            enterTextboxByID(driver,LoginPageUI.LOGIN_FORM_TEXTBOX_ID,password,"Password");
+            enterTextboxByID(LoginPageUI.LOGIN_FORM_TEXTBOX_ID, password, "Password");
         }
     }
 
     public String getLoginSummaryErrorMessage() {
-        waitForElementVisible(driver,LoginPageUI.LOGIN_SUMMARY_ERROR_MESSAGE);
-        return getElementText(driver,LoginPageUI.LOGIN_SUMMARY_ERROR_MESSAGE);
+        waitForElementVisible(LoginPageUI.LOGIN_SUMMARY_ERROR_MESSAGE);
+        return getElementText(LoginPageUI.LOGIN_SUMMARY_ERROR_MESSAGE);
     }
 
-    public String getEmailErrorMessage(){
-        waitForElementVisible(driver,LoginPageUI.EMAIL_ERROR_MESSAGE);
-        return getElementText(driver,LoginPageUI.EMAIL_ERROR_MESSAGE);
+    public String getEmailErrorMessage() {
+        waitForElementVisible(LoginPageUI.EMAIL_ERROR_MESSAGE);
+        return getElementText(LoginPageUI.EMAIL_ERROR_MESSAGE);
     }
 
-    public boolean isMyAccountLinkVisible(){
-        waitForElementVisible(driver,LoginPageUI.MY_ACCOUNT_LINK);
-        return isElementDisplayed(driver,LoginPageUI.MY_ACCOUNT_LINK);
+    public boolean isErrorMessageDisplayed(String expectedMessage) {
+        waitForElementVisible(LoginPageUI.EMAIL_ERROR_MESSAGE);
+        return getEmailErrorMessage().equals(expectedMessage);
+
     }
+
+    public boolean isMyAccountLinkVisible() {
+        waitForElementVisible(LoginPageUI.MY_ACCOUNT_LINK);
+        return isElementDisplayed(LoginPageUI.MY_ACCOUNT_LINK);
+    }
+
 
 }
 

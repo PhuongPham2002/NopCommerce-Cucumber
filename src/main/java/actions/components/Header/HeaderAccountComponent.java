@@ -1,44 +1,50 @@
 package actions.components.Header;
 
+import actions.pageObject.PageGenerator;
+import actions.pageObject.WishListPageObject;
 import commons.base.BasePage;
 import interfaces.componentUI.header.HeaderAccountComponentUI;
 import org.openqa.selenium.WebDriver;
 
 public class HeaderAccountComponent extends BasePage {
-    WebDriver driver;
 
     public HeaderAccountComponent(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
-    public void clickWishListLink() {
-        waitForElementClickable(driver, HeaderAccountComponentUI.WISHLIST_LINK);
-        clickElement(driver, HeaderAccountComponentUI.WISHLIST_LINK);
+
+    public WishListPageObject clickWishListLink() {
+        waitForElementClickable(HeaderAccountComponentUI.WISHLIST_LINK);
+        clickElement(HeaderAccountComponentUI.WISHLIST_LINK);
+        return PageGenerator.getWishListPage(driver);
     }
 
     public void clickShoppingCartLink() {
-        waitForElementClickable(driver, HeaderAccountComponentUI.SHOPPING_CART_LINK);
-        clickElement(driver, HeaderAccountComponentUI.SHOPPING_CART_LINK);
-    }
-    public void hoverToShoppingCart(){
-        hoverToElement(driver,HeaderAccountComponentUI.SHOPPING_CART_LINK);
+        waitForElementClickable(HeaderAccountComponentUI.SHOPPING_CART_LINK);
+        clickElement(HeaderAccountComponentUI.SHOPPING_CART_LINK);
     }
 
-    public void clickRegisterLink(){
-        waitForElementClickable(driver,HeaderAccountComponentUI.REGISTER_LINK);
-        clickElement(driver,HeaderAccountComponentUI.REGISTER_LINK);
-    }
-    public void clickLogoutLink(){
-        waitForElementClickable(driver,HeaderAccountComponentUI.LOGOUT_LINK);
-        clickElement(driver,HeaderAccountComponentUI.LOGOUT_LINK);
-    }
-    public void clickLoginLink(){
-        waitForElementClickable(driver,HeaderAccountComponentUI.LOGIN_LINK);
-        clickElement(driver,HeaderAccountComponentUI.LOGIN_LINK);
+    public void hoverToShoppingCart() {
+        hoverToElement(HeaderAccountComponentUI.SHOPPING_CART_LINK);
     }
 
-    public void clickMyAccountLink(){
-        waitForElementClickable(driver,HeaderAccountComponentUI.ACCOUNT_LINK);
-        clickElement(driver,HeaderAccountComponentUI.ACCOUNT_LINK);
+    public void clickRegisterLink() {
+        waitForElementClickable(HeaderAccountComponentUI.REGISTER_LINK);
+        clickElement(HeaderAccountComponentUI.REGISTER_LINK);
+    }
+
+    public void clickLogoutLink() {
+        waitForElementClickable(HeaderAccountComponentUI.LOGOUT_LINK);
+        clickElement(HeaderAccountComponentUI.LOGOUT_LINK);
+    }
+
+    public void clickLoginLink() {
+        waitForElementClickable(HeaderAccountComponentUI.LOGIN_LINK);
+        clickElement(HeaderAccountComponentUI.LOGIN_LINK);
+    }
+
+    public void clickMyAccountLink() {
+        waitForElementClickable(HeaderAccountComponentUI.ACCOUNT_LINK);
+        clickElement(HeaderAccountComponentUI.ACCOUNT_LINK);
     }
 
 }

@@ -13,8 +13,8 @@ Feature: MyAccount
     When The user navigates to "customer info" tab
     And The user updates the following user information
       | Email | unregistered email |
-    Then The user should see the update info success message "The customer info has been updated successfully."
-    And The user should see the following updated information
+    Then The user "should see" the update info success message "The customer info has been updated successfully."
+    And The user "should see" the following updated information
       | Email | unregistered email |
 
   Scenario: MyAccount_02: Update email address and login successfully with new email address
@@ -28,8 +28,8 @@ Feature: MyAccount
     When The user navigates to "customer info" tab
     And The user updates the following user information
       | Email | unregistered email |
-    Then The user should see the update info success message "The customer info has been updated successfully."
-    And The user should see the following updated information
+    Then The user "should see" the update info success message "The customer info has been updated successfully."
+    And The user "should see" the following updated information
       | Email | unregistered email |
     When The user log out from the webpage
     And The user log in with "email" and "password"

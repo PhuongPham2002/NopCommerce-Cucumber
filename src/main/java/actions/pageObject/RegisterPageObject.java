@@ -1,37 +1,38 @@
 package actions.pageObject;
 
+import actions.components.Header.HeaderAccountComponent;
 import actions.components.Header.HeaderComponent;
 import actions.components.ValidationMessageComponent;
 import commons.base.BasePage;
 import commons.helpers.CommonHelper;
-import dataTest.dataObject.RegisterTestData;
 import interfaces.pageUI.RegisterPageUI;
 import org.openqa.selenium.WebDriver;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 
 public class RegisterPageObject extends BasePage {
-    WebDriver driver;
     ValidationMessageComponent validationMessage;
     HeaderComponent header;
+    HeaderAccountComponent headerAccount;
 
     public RegisterPageObject(WebDriver driver) {
-
-        this.driver = driver;
+        super(driver);
         this.validationMessage = new ValidationMessageComponent(driver);
         this.header = new HeaderComponent(driver);
+        this.headerAccount = new HeaderAccountComponent(driver);
     }
 
     public HomePageObject clickRegisterButton() {
-        waitForElementClickable(driver, RegisterPageUI.REGISTER_BUTTON);
-        clickElement(driver,RegisterPageUI.REGISTER_BUTTON);
+        waitForElementClickable(RegisterPageUI.REGISTER_BUTTON);
+        clickElement(RegisterPageUI.REGISTER_BUTTON);
         return PageGenerator.getHomePage(driver);
     }
 
     public String getSuccessfulRegisterMessage() {
-        waitForElementVisible(driver, RegisterPageUI.SUCCESSFUL_REGISTER_MESSAGE);
-        return getElementText(driver,RegisterPageUI.SUCCESSFUL_REGISTER_MESSAGE);
+        waitForElementVisible(RegisterPageUI.SUCCESSFUL_REGISTER_MESSAGE);
+        return getElementText(RegisterPageUI.SUCCESSFUL_REGISTER_MESSAGE);
     }
 
 
@@ -41,7 +42,7 @@ public class RegisterPageObject extends BasePage {
 
 
     public void fillInRegisterForm(Map<String,String> registerData) {
-        waitForElementVisible(driver, RegisterPageUI.REGISTER_TITLE);
+        waitForElementVisible(RegisterPageUI.REGISTER_TITLE);
         Map<String, String> editableRegisterData = new LinkedHashMap<>(registerData);
 
         for (Map.Entry<String, String> entry : editableRegisterData.entrySet()) {
@@ -56,7 +57,7 @@ public class RegisterPageObject extends BasePage {
                 entry.setValue(CommonHelper.generateUniqueEmail());
             }
 
-            enterTextboxByID(driver, RegisterPageUI.REGISTER_FORM_TEXTBOX_ID, entry.getValue(), entry.getKey());
+            enterTextboxByID(RegisterPageUI.REGISTER_FORM_TEXTBOX_ID, entry.getValue(), entry.getKey());
         }
     }
 

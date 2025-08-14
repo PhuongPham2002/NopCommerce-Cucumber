@@ -7,7 +7,7 @@ public class GiftCardPageObject extends BasePage {
     WebDriver driver;
 
     public GiftCardPageObject(WebDriver driver) {
-        this.driver= driver;
+        super(driver);
     }
 
 }

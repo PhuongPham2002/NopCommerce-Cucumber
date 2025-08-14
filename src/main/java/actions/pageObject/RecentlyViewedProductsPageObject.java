@@ -13,14 +13,14 @@ public class RecentlyViewedProductsPageObject extends BasePage {
     WebDriver driver;
 
     public RecentlyViewedProductsPageObject(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
 
     public boolean isRecentlyViewedProductsMatched(Set<String> expectedProductNames) {
         waitForLoadingIconInvisible(driver);
-        waitForNumberOfElementsTobe(driver, RecentlyViewedProductsPageUI.PRODUCT_NAME,3);
-        waitForListElementsVisible(driver,RecentlyViewedProductsPageUI.PRODUCT_NAME);
-        List<WebElement> listElement = getListElement(driver,RecentlyViewedProductsPageUI.PRODUCT_NAME);
+        waitForNumberOfElementsTobe(RecentlyViewedProductsPageUI.PRODUCT_NAME, 3);
+        waitForListElementsVisible(RecentlyViewedProductsPageUI.PRODUCT_NAME);
+        List<WebElement> listElement = getListElement(RecentlyViewedProductsPageUI.PRODUCT_NAME);
         Set<String> productNames = new HashSet<>();
         for (WebElement element:listElement){
             productNames.add(element.getText().trim());

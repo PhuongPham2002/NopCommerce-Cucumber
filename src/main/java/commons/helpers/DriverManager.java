@@ -15,18 +15,19 @@ public class DriverManager {
     //Gán driver từ bên ngoài vào thread local, nơi khởi tạo browser sẽ thường dùng hàm này
 
     //để truyền driver vào luôn
-    public static void setDriver(WebDriver driverInstance){
+    public static void setDriver(WebDriver driverInstance) {
         driver.set(driverInstance);
     }
+
     //Trả về webDriver hiện tại đang được lưu trong thread, có thể gọi bất cứ nơi đâu để thao tác
-    public static WebDriver getDriver(){
-       return driver.get();
+    public static WebDriver getDriver() {
+        return driver.get();
     }
 
-    public static WebDriver getBrowserDriver(){
-        String browser = System.getProperty("browser","chrome");
+    public static WebDriver getBrowserDriver() {
+        String browser = System.getProperty("browser", "chrome");
         BrowserList browserName = BrowserList.valueOf(browser.toUpperCase());
-        switch (browserName){
+        switch (browserName) {
             case CHROME:
                 driver.set(new ChromeDriver());
                 break;
@@ -44,11 +45,11 @@ public class DriverManager {
     }
 
 
-    public static void quitDriver(){
-        if (driver.get()!=null){
+    public static void quitDriver() {
+        if (driver.get() != null) {
             driver.get().quit();
             driver.remove();
         }
     }
-    
+
 }

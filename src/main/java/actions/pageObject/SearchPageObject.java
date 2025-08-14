@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SearchPageObject extends BasePage {
-    WebDriver driver;
 
     //1. Locator
     public static final String EMPTY_KEYWORD_ERROR_MESSAGE ="Search term minimum length is 3 characters";
@@ -17,7 +16,8 @@ public class SearchPageObject extends BasePage {
 
     //2.Constructor
     public SearchPageObject(WebDriver driver) {
-        this.driver = driver;
+
+        super(driver);
     }
 
     //3.Business actions
@@ -42,69 +42,69 @@ public class SearchPageObject extends BasePage {
 
     //4.Element-Level Actions
     public String getPageTitleText() {
-        waitForElementVisible(driver, SearchPageUI.PAGE_TITLE_TEXT);
-        return getElementText(driver,SearchPageUI.PAGE_TITLE_TEXT);
+        waitForElementVisible(SearchPageUI.PAGE_TITLE_TEXT);
+        return getElementText(SearchPageUI.PAGE_TITLE_TEXT);
     }
 
     public void clickSearchButton() {
-        waitForElementClickable(driver,SearchPageUI.SEARCH_BUTTON);
-        clickElement(driver,SearchPageUI.SEARCH_BUTTON);
+        waitForElementClickable(SearchPageUI.SEARCH_BUTTON);
+        clickElement(SearchPageUI.SEARCH_BUTTON);
     }
 
     public String getValidationMessageForEmptyKeyword() {
         waitForLoadingScreenInvisible(driver);
-        waitForTextToBePresentInElement(driver,SearchPageUI.EMPTY_KEYWORD_ERROR_MESSAGE,EMPTY_KEYWORD_ERROR_MESSAGE);
-        return getElementText(driver,SearchPageUI.EMPTY_KEYWORD_ERROR_MESSAGE);
+        waitForTextToBePresentInElement(SearchPageUI.EMPTY_KEYWORD_ERROR_MESSAGE, EMPTY_KEYWORD_ERROR_MESSAGE);
+        return getElementText(SearchPageUI.EMPTY_KEYWORD_ERROR_MESSAGE);
     }
 
     public void enterKeywordSearch(String keyword) {
-        waitForElementVisible(driver,SearchPageUI.INPUT_TEXTBOX);
-        sendKeyToElement(driver,SearchPageUI.INPUT_TEXTBOX,keyword);
+        waitForElementVisible(SearchPageUI.INPUT_TEXTBOX);
+        sendKeyToElement(SearchPageUI.INPUT_TEXTBOX, keyword);
     }
 
     public String getValidationMessageForNonExistedKeyword() {
         waitForLoadingScreenInvisible(driver);
-        waitForTextToBePresentInElement(driver,SearchPageUI.NON_EXISTED_KEYWORD_MESSAGE,NON_EXISTED_KEYWORD_ERROR_MESSAGE);
-        return getElementText(driver,SearchPageUI.NON_EXISTED_KEYWORD_MESSAGE);
+        waitForTextToBePresentInElement(SearchPageUI.NON_EXISTED_KEYWORD_MESSAGE, NON_EXISTED_KEYWORD_ERROR_MESSAGE);
+        return getElementText(SearchPageUI.NON_EXISTED_KEYWORD_MESSAGE);
     }
 
     public void checkAdvancedSearchCheckbox() {
-        waitForElementClickable(driver,SearchPageUI.ADVANCED_SEARCH_CHECKBOX);
-        checkNativeCheckbox(driver,SearchPageUI.ADVANCED_SEARCH_CHECKBOX);
+        waitForElementClickable(SearchPageUI.ADVANCED_SEARCH_CHECKBOX);
+        checkNativeCheckbox(SearchPageUI.ADVANCED_SEARCH_CHECKBOX);
     }
 
     public void selectCategoryDropdown(String categoryOption) {
-        selectDropdownOption(driver,SearchPageUI.ADVANCED_SEARCH_CATEGORY_DROPDOWN,categoryOption);
-        waitForElementSelected(driver,SearchPageUI.DYNAMIC_ADVANCED_SEARCH_CATEGORY_OPTION,categoryOption);
+        selectDropdownOption(SearchPageUI.ADVANCED_SEARCH_CATEGORY_DROPDOWN, categoryOption);
+        waitForElementSelected(SearchPageUI.DYNAMIC_ADVANCED_SEARCH_CATEGORY_OPTION, categoryOption);
     }
 
 
     public void checkSubCategorySearchCheckbox() {
-        waitForElementClickable(driver,SearchPageUI.ADVANCED_SEARCH_SUB_CATEGORY_CHECKBOX);
-        clickElement(driver,SearchPageUI.ADVANCED_SEARCH_SUB_CATEGORY_CHECKBOX);
+        waitForElementClickable(SearchPageUI.ADVANCED_SEARCH_SUB_CATEGORY_CHECKBOX);
+        clickElement(SearchPageUI.ADVANCED_SEARCH_SUB_CATEGORY_CHECKBOX);
     }
 
     public void selectManufacturerDropdown(String manufacturer) {
-        selectDropdownOption(driver,SearchPageUI.ADVANCED_SEARCH_MANUFACTURER_DROPDOWN,manufacturer);
-        waitForElementSelected(driver,SearchPageUI.DYNAMIC_ADVANCED_SEARCH_MANUFACTURER_OPTION,manufacturer);
+        selectDropdownOption(SearchPageUI.ADVANCED_SEARCH_MANUFACTURER_DROPDOWN, manufacturer);
+        waitForElementSelected(SearchPageUI.DYNAMIC_ADVANCED_SEARCH_MANUFACTURER_OPTION, manufacturer);
     }
 
     //5.VERIFICATION:
 
     public boolean isProductSizeEqualTo (int number) {
-        waitForNumberOfElementsTobe(driver,SearchPageUI.PRODUCT_TITLE,number);
-        return getListElementsSize(driver,SearchPageUI.PRODUCT_TITLE) == number;
+        waitForNumberOfElementsTobe(SearchPageUI.PRODUCT_TITLE, number);
+        return getListElementsSize(SearchPageUI.PRODUCT_TITLE) == number;
 
     }
 
     public boolean isDisplayedProductEqualTo(String productName){
-        waitForTextToBePresentInElement(driver,SearchPageUI.PRODUCT_TITLE,productName);
-        return getElementText(driver,SearchPageUI.PRODUCT_TITLE).equals(productName);
+        waitForTextToBePresentInElement(SearchPageUI.PRODUCT_TITLE, productName);
+        return getElementText(SearchPageUI.PRODUCT_TITLE).equals(productName);
     }
 
     public List<String> getDisplayedProductNames(){
-        waitForListElementsVisible(driver,SearchPageUI.PRODUCT_TITLE);
-        List<WebElement> listElement = getListElement(driver,SearchPageUI.PRODUCT_TITLE);
+        waitForListElementsVisible(SearchPageUI.PRODUCT_TITLE);
+        List<WebElement> listElement = getListElement(SearchPageUI.PRODUCT_TITLE);
         List<String> listProductName = new ArrayList<>();
         for (WebElement element:listElement){
             listProductName.add(element.getText().trim());

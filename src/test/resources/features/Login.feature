@@ -7,7 +7,7 @@ Feature:  Login feature
 
   Scenario Outline: Login_01: Log in with invalid password and unregister email
     When The user log in with "<email>" and "<password>"
-    Then The user should see the login message "<message>"
+    Then The user "should see" the login message "<message>"
     Examples:
       | case             | email         | password  | message                                                                                     |
       | NonRegisterEmail | men@gmail.com | 123456789 | Login was unsuccessful. Please correct the errors and try again.\nNo customer account found |
@@ -16,12 +16,12 @@ Feature:  Login feature
 
   Scenario: Login_02: Log in with invalid email
     When The user enter "hoa" into email field and move to "password" field
-    Then The user should see the login message "Please enter a valid email address."
+    Then The user "should see" the login message "Please enter a valid email address."
 
   Scenario: Login_03: Log in with empty data
     When The user log in with "" and ""
-    Then The user should see the login message "Please enter your email"
+    Then The user "should see" the login message "Please enter your email"
 
   Scenario: Login_04: Log in with valid email and password
     When The user log in with "email" and "password"
-    Then The user should be navigated to HomePage
+    Then The user "should be" navigated to "Home page"

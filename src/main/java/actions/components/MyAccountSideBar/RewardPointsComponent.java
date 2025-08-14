@@ -7,6 +7,6 @@ public class RewardPointsComponent extends BasePage {
     WebDriver driver;
 
     public RewardPointsComponent(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
 }
