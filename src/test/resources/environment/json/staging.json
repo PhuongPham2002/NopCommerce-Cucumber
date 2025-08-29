@@ -1,0 +1,14 @@
+{
+  "url": {
+  "Nopcommerce WebPage":"https://localhost:59579/"
+  },
+  "credential": {
+    "user": {
+    "admin_password": "Test@123"
+    },
+    "admin": {
+      "admin_username": "admin"
+    }
+  }
+
+}

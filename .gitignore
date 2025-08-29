@@ -41,3 +41,5 @@ build/
 logs/
 ### ALLURE ###
 allure-results/
+
+Nopcommerce.iml

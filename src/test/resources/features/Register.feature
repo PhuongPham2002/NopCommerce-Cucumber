@@ -2,7 +2,7 @@
 Feature: Register
 
   Background:
-    Given The user access Nopcommerce Webpage "https://localhost:59579/"
+    Given The user access "Nopcommerce Webpage"
     Given The user is on the register page
 
   Scenario: Register_01: Register with empty data
@@ -59,6 +59,6 @@ Feature: Register
       | Email            | [random]  |
       | Password         | 123456789 |
       | ConfirmPassword | 123456789 |
-    Then I should see the register successful messages "Your registration completed"
+    Then The user should see the register successful messages "Your registration completed"
 
 

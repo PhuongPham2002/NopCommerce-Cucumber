@@ -1,0 +1,1 @@
+[{"uid":"ec9dcb7c3173cf93","name":"MyAccount_02: Update email address with valid value","time":{"start":1755178280131,"stop":1755178280131,"duration":0},"status":"passed","severity":"normal"},{"uid":"fd806e366e22bf4a","name":"MyAccount_01: Update customer Info","time":{"start":1755178261922,"stop":1755178280100,"duration":18178},"status":"broken","severity":"normal"}]
