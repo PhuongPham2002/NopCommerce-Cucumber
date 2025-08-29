@@ -1,9 +1,9 @@
 package stepdefinitions;
 
-import actions.pageObject.HomePageObject;
-import actions.pageObject.LoginPageObject;
-import actions.pageObject.PageGenerator;
-import commons.constants.GlobalConstants;
+import commons.constants.LoginMessage;
+import pageObject.HomePageObject;
+import pageObject.LoginPageObject;
+import pageObject.PageGenerator;
 import commons.helpers.DriverManager;
 import commons.helpers.TestDataHelper;
 import io.cucumber.core.exception.CucumberException;
@@ -19,20 +19,14 @@ import java.util.List;
 public class LoginSteps {
     LoginPageObject loginPage;
     HomePageObject homePage;
-    public static final String EMPTY_EMAIL_PASSWORD_ERROR_MESSAGE = "Please enter your email";
-    public static final String INVALID_EMAIL_ERROR_MESSAGE = "Please enter a valid email address.";
-    public final static String NON_REGISTERED_EMAIL_ERROR_MESSAGE = "Login was unsuccessful. Please correct the errors and try again.\nNo customer account found";
-    public final static String EMPTY_PASSWORD_ERROR_MESSAGE = "Login was unsuccessful. Please correct the errors and try again.\nNo customer account found";
-    public final static String INVALID_PASSWORD_ERROR_MESSAGE = "Login was unsuccessful. Please correct the errors and try again.\nNo customer account found";
 
-
-    @And("The user access {string}")
+    @Given("The user access {string}")
     public void theUserAccessIntoNopcommerceWebpage(String webName) {
-        String url = TestDataHelper.getData(webName.replace(" ", "_"));
+        String url = TestDataHelper.getData(webName);
         DriverManager.getDriver().get(url);
     }
 
-    @Given("The user is on the login page")
+    @And("The user is on the login page")
     public void openLoginPage() {
         homePage = PageGenerator.getHomePage(DriverManager.getDriver());
         loginPage = homePage.clickLoginLink();
@@ -41,7 +35,7 @@ public class LoginSteps {
 
     @When("The user log in with {string} and {string}")
     public void loginWithCredentials(String emailAddress, String password) {
-        loginPage.enterLoginForm(TestDataHelper.getData("Email"), TestDataHelper.getData("Password"));
+        loginPage.enterLoginForm(emailAddress, password);
         homePage = loginPage.clickLoginButton();
 
 
@@ -51,23 +45,23 @@ public class LoginSteps {
     @Then("The user {string} the login message {string}")
     public void userShouldSeeErrorMessage(String expectation, String expectedMessage) {
         if (expectation.equalsIgnoreCase("should see")) {
-            if (expectedMessage.equals(EMPTY_EMAIL_PASSWORD_ERROR_MESSAGE) || expectedMessage.equals(INVALID_EMAIL_ERROR_MESSAGE)) {
+            if (expectedMessage.equals(LoginMessage.EMPTY_EMAIL_PASSWORD_ERROR_MESSAGE) || expectedMessage.equals(LoginMessage.INVALID_EMAIL_ERROR_MESSAGE)) {
                 Assert.assertTrue(loginPage.isErrorMessageDisplayed(expectedMessage));
             }
-            if (List.of(
-                    NON_REGISTERED_EMAIL_ERROR_MESSAGE,
-                    EMPTY_PASSWORD_ERROR_MESSAGE,
-                    INVALID_PASSWORD_ERROR_MESSAGE).contains(expectedMessage)) {
-                Assert.assertTrue(loginPage.isErrorMessageDisplayed(expectedMessage));
+            else if (List.of(
+                    LoginMessage.NON_REGISTERED_EMAIL_ERROR_MESSAGE,
+                    LoginMessage.EMPTY_PASSWORD_ERROR_MESSAGE,
+                    LoginMessage.INVALID_PASSWORD_ERROR_MESSAGE).contains(expectedMessage)) {
+                Assert.assertTrue(loginPage.isSummaryErrorMessageDisplayed(expectedMessage));
             }
         } else if (expectation.equalsIgnoreCase("should not see")) {
-            if (expectedMessage.equals(EMPTY_EMAIL_PASSWORD_ERROR_MESSAGE) || expectedMessage.equals(INVALID_EMAIL_ERROR_MESSAGE)) {
+            if (expectedMessage.equals(LoginMessage.EMPTY_EMAIL_PASSWORD_ERROR_MESSAGE) || expectedMessage.equals(LoginMessage.INVALID_EMAIL_ERROR_MESSAGE)) {
                 Assert.assertFalse(loginPage.isErrorMessageDisplayed(expectedMessage));
             }
             if (List.of(
-                    NON_REGISTERED_EMAIL_ERROR_MESSAGE,
-                    EMPTY_PASSWORD_ERROR_MESSAGE,
-                    INVALID_PASSWORD_ERROR_MESSAGE).contains(expectedMessage)) {
+                    LoginMessage.NON_REGISTERED_EMAIL_ERROR_MESSAGE,
+                    LoginMessage.EMPTY_PASSWORD_ERROR_MESSAGE,
+                    LoginMessage.INVALID_PASSWORD_ERROR_MESSAGE).contains(expectedMessage)) {
                 Assert.assertFalse(loginPage.isErrorMessageDisplayed(expectedMessage));
             }
         }

@@ -8,7 +8,7 @@ Feature: MyAccount
       | Email     | admin@yourstore.com |
     And The user access "Nopcommerce Webpage"
     And The user is on the login page
-    And The user log in with "email" and "password"
+    And The user log in with "admin@yourstore.com" and "admin123"
     And The user navigate to the My Account page
     And The user navigates to "customer info" tab
 
@@ -58,7 +58,7 @@ Feature: MyAccount
   Scenario: MyAccount_01: Update customer Info
     When The user access "Nopcommerce Webpage"
     And The user is on the login page
-    And The user log in with "email" and "password"
+    And The user log in with "admin@yourstore.com" and "admin123"
     And The user navigate to the My Account page
     And The user navigates to "customer info" tab
     And The user updates the following user information random

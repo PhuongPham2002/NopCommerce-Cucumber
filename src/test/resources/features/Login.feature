@@ -1,9 +1,9 @@
-
+@Login
 Feature:  Login feature
 
   Background:
     Given The user access "Nopcommerce Webpage"
-    Given  The user is on the login page
+    And The user is on the login page
 
   Scenario Outline: Login_01: Log in with invalid password and unregister email
     When The user log in with "<email>" and "<password>"
@@ -23,5 +23,5 @@ Feature:  Login feature
     Then The user "should see" the login message "Please enter your email"
 
   Scenario: Login_04: Log in with valid email and password
-    When The user log in with "email" and "password"
+    When The user log in with "admin@yourstore.com" and "admin123"
     Then The user "should be" navigated to "Home page"

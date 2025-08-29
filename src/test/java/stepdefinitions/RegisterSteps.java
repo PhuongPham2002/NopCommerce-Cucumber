@@ -1,8 +1,8 @@
 package stepdefinitions;
 
-import actions.pageObject.HomePageObject;
-import actions.pageObject.PageGenerator;
-import actions.pageObject.RegisterPageObject;
+import pageObject.HomePageObject;
+import pageObject.PageGenerator;
+import pageObject.RegisterPageObject;
 import commons.helpers.DriverManager;
 import io.cucumber.core.exception.CucumberException;
 import io.cucumber.datatable.DataTable;
@@ -57,7 +57,7 @@ public class RegisterSteps {
     }
 
 
-    @Then("I should see the register successful messages {string}")
+    @Then("The user should see the register successful messages {string}")
     public void iShouldSeeTheRegisterSuccessfulMessages(String expectedMessage) {
         Assert.assertEquals(registerPage.getSuccessfulRegisterMessage(),expectedMessage);
     }

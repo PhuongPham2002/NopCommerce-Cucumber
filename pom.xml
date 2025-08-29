@@ -24,6 +24,7 @@
         <cucumber.version>7.22.2</cucumber.version>
         <gherkin.version>32.1.1</gherkin.version>
         <RestAssured.version>5.5.5</RestAssured.version>
+
     </properties>
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
@@ -111,6 +112,12 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.19.2</version>
+        </dependency>
+
         <!-- https://mvnrepository.com/artifact/org.json/json -->
         <dependency>
             <groupId>org.json</groupId>
@@ -118,18 +125,11 @@
             <version>20250517</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-picocontainer -->
-        <dependency>
-            <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-picocontainer</artifactId>
-            <version>7.26.0</version>
-        </dependency>
-
 
     </dependencies>
 
     <build>
-        <sourceDirectory>${project.basedir}/src/main/java</sourceDirectory>
+        <sourceDirectory>src/main</sourceDirectory>
         <plugins>
             <!-- Compiler code -->
             <plugin>
@@ -157,7 +157,7 @@
                 <version>${maven.surefire.plugin}</version>
                 <configuration>
                     <includes>
-                        <include>**/CucumberTestRunner.class</include>
+                        <include>**/runners.CucumberTestRunner.class</include>
                     </includes>
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
